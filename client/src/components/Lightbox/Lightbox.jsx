@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import LightboxControls from "./LightboxControls";
-import LightboxCounter from "./LightboxCounter";
+import {
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 function Lightbox({
   photos,
@@ -14,32 +16,61 @@ function Lightbox({
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         onClose();
       }
 
-      if (event.key === "ArrowLeft") {
+      if (
+        event.key === "ArrowLeft" &&
+        currentIndex > 0
+      ) {
+        event.preventDefault();
         onPrevious();
       }
 
-      if (event.key === "ArrowRight") {
+      if (
+        event.key === "ArrowRight" &&
+        currentIndex < photos.length - 1
+      ) {
+        event.preventDefault();
         onNext();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    const previousOverflow =
+      document.body.style.overflow;
 
-    // Prevent the listing page from scrolling
     document.body.style.overflow = "hidden";
 
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.body.style.overflow =
+        previousOverflow;
+
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
-  }, [onClose, onPrevious, onNext]);
+  }, [
+    currentIndex,
+    photos.length,
+    onClose,
+    onPrevious,
+    onNext,
+  ]);
 
   if (!currentPhoto) {
     return null;
   }
+
+  const isFirstPhoto = currentIndex === 0;
+  const isLastPhoto =
+    currentIndex === photos.length - 1;
 
   return (
     <div
@@ -57,13 +88,14 @@ function Lightbox({
       aria-label="Photo viewer"
     >
       {/* Top bar */}
+
       <div
         className="
           absolute
           left-0
           right-0
           top-0
-          z-10
+          z-20
           flex
           h-[72px]
           items-center
@@ -71,10 +103,26 @@ function Lightbox({
           px-[32px]
         "
       >
-        <LightboxCounter
-          currentIndex={currentIndex}
-          total={photos.length}
-        />
+        {/* Counter */}
+
+        <div
+          className="
+            flex
+            h-[36px]
+            items-center
+            rounded-full
+            bg-[rgba(0,0,0,0.45)]
+            px-[14px]
+            text-[13px]
+            font-medium
+            text-[var(--shade-01)]
+            backdrop-blur-[4px]
+          "
+        >
+          {currentIndex + 1} / {photos.length}
+        </div>
+
+        {/* Close */}
 
         <button
           type="button"
@@ -107,7 +155,8 @@ function Lightbox({
         </button>
       </div>
 
-      {/* Image */}
+      {/* Image area */}
+
       <div
         className="
           flex
@@ -122,25 +171,98 @@ function Lightbox({
       >
         <img
           src={currentPhoto.src}
-          alt={currentPhoto.alt || `Photo ${currentIndex + 1}`}
-          onClick={(event) => event.stopPropagation()}
+          alt={
+            currentPhoto.alt ||
+            `Photo ${currentIndex + 1}`
+          }
+          onClick={(event) =>
+            event.stopPropagation()
+          }
           className="
             max-h-full
             max-w-full
-            object-contain
             select-none
+            object-contain
           "
           draggable="false"
         />
       </div>
 
-      {/* Previous / Next */}
-      <LightboxControls
-        onPrevious={onPrevious}
-        onNext={onNext}
-        disablePrevious={currentIndex === 0}
-        disableNext={currentIndex === photos.length - 1}
-      />
+      {/* Previous */}
+
+      <button
+        type="button"
+        onClick={onPrevious}
+        disabled={isFirstPhoto}
+        aria-label="Previous photo"
+        className="
+          absolute
+          left-[24px]
+          top-1/2
+          z-20
+          flex
+          h-[48px]
+          w-[48px]
+          -translate-y-1/2
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-[rgba(255,255,255,0.7)]
+          bg-[rgba(0,0,0,0.35)]
+          p-0
+          text-[var(--shade-01)]
+          transition-all
+          duration-150
+          hover:bg-[rgba(0,0,0,0.6)]
+          active:scale-95
+          disabled:cursor-not-allowed
+          disabled:opacity-30
+        "
+      >
+        <ChevronLeft
+          size={24}
+          strokeWidth={1.7}
+        />
+      </button>
+
+      {/* Next */}
+
+      <button
+        type="button"
+        onClick={onNext}
+        disabled={isLastPhoto}
+        aria-label="Next photo"
+        className="
+          absolute
+          right-[24px]
+          top-1/2
+          z-20
+          flex
+          h-[48px]
+          w-[48px]
+          -translate-y-1/2
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-[rgba(255,255,255,0.7)]
+          bg-[rgba(0,0,0,0.35)]
+          p-0
+          text-[var(--shade-01)]
+          transition-all
+          duration-150
+          hover:bg-[rgba(0,0,0,0.6)]
+          active:scale-95
+          disabled:cursor-not-allowed
+          disabled:opacity-30
+        "
+      >
+        <ChevronRight
+          size={24}
+          strokeWidth={1.7}
+        />
+      </button>
     </div>
   );
 }

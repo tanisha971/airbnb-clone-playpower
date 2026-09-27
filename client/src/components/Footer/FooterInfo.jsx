@@ -48,6 +48,7 @@ function FooterInfo() {
   return (
     <footer>
       {/* Bottom listing navigation */}
+
       <div
         className="
           border-b
@@ -166,6 +167,7 @@ function FooterInfo() {
       </div>
 
       {/* Policies */}
+
       <section
         className="
           mx-auto
@@ -184,6 +186,7 @@ function FooterInfo() {
           "
         >
           {/* Cancellation */}
+
           <div>
             <h3
               className="
@@ -228,6 +231,7 @@ function FooterInfo() {
           </div>
 
           {/* House rules */}
+
           <div>
             <h3
               className="
@@ -254,7 +258,10 @@ function FooterInfo() {
                   size={13}
                   strokeWidth={1.5}
                 />
-                <span>Check-in after 2:00 pm</span>
+
+                <span>
+                  Check-in after 2:00 pm
+                </span>
               </div>
 
               <div
@@ -270,6 +277,7 @@ function FooterInfo() {
                   size={13}
                   strokeWidth={1.5}
                 />
+
                 <span>Pets allowed</span>
               </div>
 
@@ -282,7 +290,9 @@ function FooterInfo() {
                   text-[var(--shade-02)]
                 "
               >
-                <span>Check-out before 11:00 am</span>
+                <span>
+                  Check-out before 11:00 am
+                </span>
               </div>
             </div>
 
@@ -304,6 +314,7 @@ function FooterInfo() {
           </div>
 
           {/* Safety */}
+
           <div>
             <h3
               className="
@@ -368,6 +379,7 @@ function FooterInfo() {
       </section>
 
       {/* More stays nearby */}
+
       <section
         className="
           mx-auto
@@ -458,6 +470,7 @@ function FooterInfo() {
         </div>
 
         {/* Nearby cards */}
+
         <div
           className="
             mt-[18px]
@@ -469,9 +482,7 @@ function FooterInfo() {
           {nearbyStays.map((stay) => (
             <article
               key={stay.title}
-              className="
-                min-w-0
-              "
+              className="min-w-0"
             >
               <div
                 className="

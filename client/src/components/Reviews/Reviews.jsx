@@ -2,11 +2,9 @@ import {
   Award,
   BedDouble,
   CheckCircle,
-  CircleDollarSign,
   ClipboardCheck,
-  Clock3,
-  MessageCircle,
   Map,
+  MessageCircle,
   ShieldCheck,
   Sparkles,
   Tag,
@@ -134,6 +132,7 @@ function Reviews() {
       "
     >
       {/* Main rating */}
+
       <div className="text-center">
         <div
           className="
@@ -222,6 +221,7 @@ function Reviews() {
       </div>
 
       {/* Rating breakdown */}
+
       <div
         className="
           mt-[40px]
@@ -260,15 +260,36 @@ function Reviews() {
                   {[5, 4, 3, 2, 1].map((number) => (
                     <div
                       key={number}
-                      className="flex items-center gap-[5px]"
+                      className="
+                        flex
+                        items-center
+                        gap-[5px]
+                      "
                     >
-                      <span className="w-[8px] text-[8px] text-[var(--neutral-07)]">
+                      <span
+                        className="
+                          w-[8px]
+                          text-[8px]
+                          text-[var(--neutral-07)]
+                        "
+                      >
                         {number}
                       </span>
 
-                      <div className="h-[2px] flex-1 rounded-full bg-[var(--neutral-02)]">
+                      <div
+                        className="
+                          h-[2px]
+                          flex-1
+                          rounded-full
+                          bg-[var(--neutral-02)]
+                        "
+                      >
                         <div
-                          className="h-full rounded-full bg-[var(--shade-02)]"
+                          className="
+                            h-full
+                            rounded-full
+                            bg-[var(--shade-02)]
+                          "
                           style={{
                             width:
                               number === 5
@@ -313,6 +334,7 @@ function Reviews() {
       </div>
 
       {/* Review category pills */}
+
       <div
         className="
           flex
@@ -354,6 +376,7 @@ function Reviews() {
       </div>
 
       {/* Reviews */}
+
       <div
         className="
           grid
@@ -368,6 +391,7 @@ function Reviews() {
             className="min-h-[125px]"
           >
             {/* Reviewer */}
+
             <div
               className="
                 flex
@@ -432,6 +456,7 @@ function Reviews() {
             </div>
 
             {/* Rating + date */}
+
             <div
               className="
                 mt-[10px]
@@ -452,6 +477,7 @@ function Reviews() {
             </div>
 
             {/* Comment */}
+
             <p
               className="
                 m-0
@@ -487,6 +513,7 @@ function Reviews() {
       </div>
 
       {/* Show all reviews */}
+
       <button
         type="button"
         className="

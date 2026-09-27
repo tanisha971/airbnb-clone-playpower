@@ -20,6 +20,7 @@ function Location() {
       "
     >
       {/* Heading */}
+
       <h2
         className="
           m-0
@@ -45,6 +46,7 @@ function Location() {
       </p>
 
       {/* Map */}
+
       <div
         className="
           relative
@@ -58,7 +60,8 @@ function Location() {
           bg-[#e8efe3]
         "
       >
-        {/* Water area */}
+        {/* Water */}
+
         <div
           className="
             absolute
@@ -70,7 +73,8 @@ function Location() {
           "
         />
 
-        {/* Land shapes */}
+        {/* Land shape */}
+
         <div
           className="
             absolute
@@ -95,6 +99,7 @@ function Location() {
         />
 
         {/* Map grid */}
+
         <div
           className="
             absolute
@@ -118,7 +123,8 @@ function Location() {
           }}
         />
 
-        {/* Map circles / neighbourhood areas */}
+        {/* Neighbourhood areas */}
+
         <div
           className="
             absolute
@@ -146,6 +152,7 @@ function Location() {
         />
 
         {/* Locate button */}
+
         <button
           type="button"
           aria-label="Locate"
@@ -173,6 +180,7 @@ function Location() {
         </button>
 
         {/* Zoom controls */}
+
         <div
           className="
             absolute
@@ -234,6 +242,7 @@ function Location() {
         </div>
 
         {/* Property marker */}
+
         <div
           className="
             absolute
@@ -261,6 +270,7 @@ function Location() {
       </div>
 
       {/* Location disclaimer */}
+
       <p
         className="
           m-0
@@ -274,6 +284,7 @@ function Location() {
       </p>
 
       {/* Neighbourhood */}
+
       <div className="mt-[28px]">
         <h3
           className="

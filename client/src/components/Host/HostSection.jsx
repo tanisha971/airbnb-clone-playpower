@@ -1,12 +1,9 @@
 import {
   BadgeCheck,
-  BriefcaseBusiness,
   CalendarCheck,
-  CheckCircle,
   Clock3,
   MessageCircle,
   ShieldCheck,
-  Star,
 } from "lucide-react";
 
 function HostSection() {
@@ -48,7 +45,6 @@ function HostSection() {
         py-[36px]
       "
     >
-      {/* Heading */}
       <h2
         className="
           m-0
@@ -70,6 +66,7 @@ function HostSection() {
         "
       >
         {/* Host card */}
+
         <div
           className="
             flex
@@ -84,6 +81,7 @@ function HostSection() {
           "
         >
           {/* Host identity */}
+
           <div
             className="
               flex
@@ -139,6 +137,7 @@ function HostSection() {
           </div>
 
           {/* Host stats */}
+
           <div
             className="
               mt-[20px]
@@ -215,6 +214,7 @@ function HostSection() {
         </div>
 
         {/* Host details */}
+
         <div>
           <div
             className="
@@ -225,11 +225,15 @@ function HostSection() {
             "
           >
             {/* Detail 1 */}
+
             <div className="flex gap-[12px]">
               <Clock3
                 size={18}
                 strokeWidth={1.6}
-                className="shrink-0 text-[var(--shade-02)]"
+                className="
+                  shrink-0
+                  text-[var(--shade-02)]
+                "
               />
 
               <div>
@@ -259,11 +263,15 @@ function HostSection() {
             </div>
 
             {/* Detail 2 */}
+
             <div className="flex gap-[12px]">
               <CalendarCheck
                 size={18}
                 strokeWidth={1.6}
-                className="shrink-0 text-[var(--shade-02)]"
+                className="
+                  shrink-0
+                  text-[var(--shade-02)]
+                "
               />
 
               <div>
@@ -293,11 +301,15 @@ function HostSection() {
             </div>
 
             {/* Detail 3 */}
+
             <div className="flex gap-[12px]">
               <ShieldCheck
                 size={18}
                 strokeWidth={1.6}
-                className="shrink-0 text-[var(--shade-02)]"
+                className="
+                  shrink-0
+                  text-[var(--shade-02)]
+                "
               />
 
               <div>
@@ -327,11 +339,15 @@ function HostSection() {
             </div>
 
             {/* Detail 4 */}
+
             <div className="flex gap-[12px]">
               <MessageCircle
                 size={18}
                 strokeWidth={1.6}
-                className="shrink-0 text-[var(--shade-02)]"
+                className="
+                  shrink-0
+                  text-[var(--shade-02)]
+                "
               />
 
               <div>
@@ -362,6 +378,7 @@ function HostSection() {
           </div>
 
           {/* Co-hosts */}
+
           <div className="mt-[30px]">
             <h3
               className="
@@ -425,6 +442,7 @@ function HostSection() {
           </div>
 
           {/* Message button */}
+
           <button
             type="button"
             className="
@@ -458,6 +476,7 @@ function HostSection() {
       </div>
 
       {/* Safety / communication note */}
+
       <div
         className="
           mt-[28px]
