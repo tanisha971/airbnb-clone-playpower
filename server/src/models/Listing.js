@@ -6,24 +6,130 @@ const photoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     alt: {
       type: String,
       default: "",
     },
+
     order: {
       type: Number,
       default: 0,
     },
   },
-  { _id: false }
+  {
+    _id: false,
+  }
 );
 
-const amenitySchema = new mongoose.Schema(
+const locationSchema = new mongoose.Schema(
   {
-    name: String,
-    icon: String,
+    city: String,
+    state: String,
+    country: String,
+    address: String,
+    latitude: Number,
+    longitude: Number,
   },
-  { _id: false }
+  {
+    _id: false,
+  }
+);
+
+const sleepingArrangementSchema = new mongoose.Schema(
+  {
+    room: {
+      type: String,
+      required: true,
+    },
+
+    description: {
+      type: String,
+      required: true,
+    },
+
+    image: {
+      type: String,
+      default: "",
+    },
+  },
+  {
+    _id: false,
+  }
+);
+
+const hostSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+
+    image: {
+      type: String,
+      default: "",
+    },
+
+    yearsHosting: {
+      type: Number,
+      default: 0,
+    },
+
+    responseRate: {
+      type: String,
+      default: "",
+    },
+
+    isSuperhost: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    _id: false,
+  }
+);
+
+const ratingSchema = new mongoose.Schema(
+  {
+    overall: {
+      type: Number,
+      default: 0,
+    },
+
+    cleanliness: {
+      type: Number,
+      default: 0,
+    },
+
+    accuracy: {
+      type: Number,
+      default: 0,
+    },
+
+    checkIn: {
+      type: Number,
+      default: 0,
+    },
+
+    communication: {
+      type: Number,
+      default: 0,
+    },
+
+    location: {
+      type: Number,
+      default: 0,
+    },
+
+    value: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    _id: false,
+  }
 );
 
 const listingSchema = new mongoose.Schema(
@@ -31,47 +137,89 @@ const listingSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      trim: true,
+    },
+
+    subtitle: {
+      type: String,
+      default: "",
+    },
+
+    description: {
+      type: String,
+      default: "",
+    },
+
+    propertyType: {
+      type: String,
+      default: "Apartment",
     },
 
     location: {
-      city: String,
-      state: String,
-      country: String,
+      type: locationSchema,
+      required: true,
     },
 
-    description: String,
+    pricePerNight: {
+      type: Number,
+      required: true,
+    },
 
-    pricePerNight: Number,
+    rating: {
+      type: Number,
+      default: 0,
+    },
 
-    rating: Number,
+    reviewCount: {
+      type: Number,
+      default: 0,
+    },
 
-    reviewCount: Number,
+    guests: {
+      type: Number,
+      default: 0,
+    },
 
-    guests: Number,
+    bedrooms: {
+      type: Number,
+      default: 0,
+    },
 
-    bedrooms: Number,
+    beds: {
+      type: Number,
+      default: 0,
+    },
 
-    beds: Number,
+    bathrooms: {
+      type: Number,
+      default: 0,
+    },
 
-    bathrooms: Number,
+    photos: {
+      type: [photoSchema],
+      default: [],
+    },
 
-    photos: [photoSchema],
-
-    amenities: [amenitySchema],
-
-    sleepingArrangements: [
+    amenities: [
       {
-        room: String,
-        description: String,
-        image: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Amenity",
       },
     ],
 
+    sleepingArrangements: {
+      type: [sleepingArrangementSchema],
+      default: [],
+    },
+
     host: {
-      name: String,
-      image: String,
-      yearsHosting: Number,
-      responseRate: String,
+      type: hostSchema,
+      required: true,
+    },
+
+    ratingBreakdown: {
+      type: ratingSchema,
+      default: {},
     },
   },
   {
