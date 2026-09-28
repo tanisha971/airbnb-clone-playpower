@@ -1,6 +1,4 @@
 import {
-  BadgeCheck,
-  CalendarCheck,
   Clock3,
   MessageCircle,
   ShieldCheck,
@@ -9,28 +7,36 @@ import {
 function HostSection() {
   const coHosts = [
     {
-      name: "Shreya",
-      image: "/assets/host/mirashya.jpg",
+      name: "Sharath",
+      image: "/assets/host/h1.jpg",
     },
     {
-      name: "Anand",
-      image: "/assets/host/cohost-02.jpg",
+      name: "Aman Dev Pahwa",
+      image: "/assets/host/h2.jpg",
     },
     {
-      name: "Megha",
-      image: "/assets/host/cohost-03.jpg",
+      name: "Maria Karen Priyanka",
+      image: "/assets/host/h3.jpg",
     },
     {
-      name: "Kunal",
-      image: "/assets/host/cohost-04.jpg",
+      name: "Simran",
+      image: "/assets/host/h4.jpg",
     },
     {
-      name: "Riya",
-      image: "/assets/host/cohost-05.jpg",
+      name: "Pallavi",
+      image: "/assets/host/h5.avif",
     },
     {
-      name: "Arjun",
-      image: "/assets/host/cohost-06.jpg",
+      name: "Sanyukta",
+      image: "/assets/host/h6.avif",
+    },
+    {
+      name: "Shruti",
+      image: "/assets/host/h7.jpg",
+    },
+    {
+      name: "Amisha",
+      image: "/assets/host/h8.jpg",
     },
   ];
 
@@ -38,385 +44,333 @@ function HostSection() {
     <section
       className="
         mx-auto
-        w-[calc(100%-180px)]
+        w-[calc(100%-80px)]
         max-w-[1120px]
         border-b
         border-[var(--neutral-03)]
-        py-[36px]
+        py-[48px]
       "
     >
+      {/* =====================================================
+          HEADING
+      ===================================================== */}
+
       <h2
         className="
           m-0
-          text-[16px]
+          text-[26px]
           font-semibold
-          leading-[22px]
+          leading-[32px]
+          tracking-[-0.02em]
           text-[var(--shade-02)]
         "
       >
         Meet your host
       </h2>
 
+      {/* =====================================================
+          HOST + DETAILS
+      ===================================================== */}
+
       <div
         className="
-          mt-[22px]
+          mt-[28px]
           grid
-          grid-cols-[320px_1fr]
-          gap-[48px]
+          grid-cols-[398px_minmax(0,1fr)]
+          gap-[54px]
         "
       >
-        {/* Host card */}
-
-        <div
-          className="
-            flex
-            min-h-[210px]
-            flex-col
-            rounded-[12px]
-            border
-            border-[var(--neutral-03)]
-            bg-[var(--shade-01)]
-            p-[20px]
-            shadow-[0_2px_8px_rgba(0,0,0,0.08)]
-          "
-        >
-          {/* Host identity */}
-
-          <div
-            className="
-              flex
-              items-center
-              gap-[14px]
-            "
-          >
-            <div
-              className="
-                flex
-                h-[72px]
-                w-[72px]
-                shrink-0
-                overflow-hidden
-                rounded-full
-                bg-[var(--accent-01)]
-              "
-            >
-              <img
-                src="/assets/host/host.jpg"
-                alt="Mirashya Homes"
-                className="
-                  h-full
-                  w-full
-                  object-cover
-                "
-              />
-            </div>
-
-            <div>
-              <h3
-                className="
-                  m-0
-                  text-[16px]
-                  font-semibold
-                  text-[var(--shade-02)]
-                "
-              >
-                Mirashya Homes
-              </h3>
-
-              <p
-                className="
-                  m-0
-                  mt-[4px]
-                  text-[11px]
-                  text-[var(--neutral-07)]
-                "
-              >
-                Host · 2 years hosting
-              </p>
-            </div>
-          </div>
-
-          {/* Host stats */}
-
-          <div
-            className="
-              mt-[20px]
-              grid
-              grid-cols-2
-              gap-[14px]
-              border-t
-              border-[var(--neutral-02)]
-              pt-[16px]
-            "
-          >
-            <div>
-              <span
-                className="
-                  block
-                  text-[16px]
-                  font-semibold
-                  text-[var(--shade-02)]
-                "
-              >
-                1,463
-              </span>
-
-              <span
-                className="
-                  text-[10px]
-                  text-[var(--neutral-07)]
-                "
-              >
-                Reviews
-              </span>
-            </div>
-
-            <div>
-              <span
-                className="
-                  block
-                  text-[16px]
-                  font-semibold
-                  text-[var(--shade-02)]
-                "
-              >
-                4.68★
-              </span>
-
-              <span
-                className="
-                  text-[10px]
-                  text-[var(--neutral-07)]
-                "
-              >
-                Rating
-              </span>
-            </div>
-          </div>
-
-          <div
-            className="
-              mt-[14px]
-              flex
-              items-center
-              gap-[7px]
-              text-[10px]
-              text-[var(--neutral-07)]
-            "
-          >
-            <BadgeCheck
-              size={14}
-              strokeWidth={1.6}
-            />
-
-            Superhost
-          </div>
-        </div>
-
-        {/* Host details */}
+        {/* ===================================================
+            HOST CARD
+        =================================================== */}
 
         <div>
           <div
             className="
-              grid
-              grid-cols-2
-              gap-x-[42px]
-              gap-y-[22px]
+              flex
+              h-[305px]
+              w-[398px]
+              items-center
+              rounded-[22px]
+              bg-[var(--shade-01)]
+              p-[36px]
+              shadow-[0_8px_24px_rgba(0,0,0,0.12)]
             "
           >
-            {/* Detail 1 */}
+            {/* HOST IDENTITY */}
 
-            <div className="flex gap-[12px]">
-              <Clock3
-                size={18}
-                strokeWidth={1.6}
+            <div
+              className="
+                flex
+                w-[216px]
+                flex-col
+                items-center
+                justify-center
+                border-r
+                border-[var(--neutral-02)]
+                pr-[28px]
+              "
+            >
+              <div
                 className="
-                  shrink-0
+                  relative
+                  h-[104px]
+                  w-[104px]
+                  overflow-hidden
+                  rounded-full
+                  bg-[var(--accent-01)]
+                "
+              >
+                <img
+                  src="/assets/host/mirashya.jpg"
+                  alt="Mirashya Homes"
+                  className="
+                    h-full
+                    w-full
+                    object-cover
+                  "
+                />
+
+                <span
+                  className="
+                    absolute
+                    bottom-[2px]
+                    right-[0px]
+                    flex
+                    h-[32px]
+                    w-[32px]
+                    items-center
+                    justify-center
+                    rounded-full
+                    border-[3px]
+                    border-white
+                    bg-[var(--primary-02)]
+                    text-[18px]
+                    font-semibold
+                    text-white
+                  "
+                >
+                  ✓
+                </span>
+              </div>
+
+              <h3
+                className="
+                  m-0
+                  mt-[16px]
+                  text-center
+                  text-[28px]
+                  font-semibold
+                  leading-[34px]
+                  tracking-[-0.02em]
                   text-[var(--shade-02)]
                 "
-              />
+              >
+                Mirashya
+                <br />
+                Homes
+              </h3>
 
-              <div>
-                <h3
-                  className="
-                    m-0
-                    text-[13px]
-                    font-semibold
-                    text-[var(--shade-02)]
-                  "
-                >
-                  Responds within an hour
-                </h3>
-
-                <p
-                  className="
-                    m-0
-                    mt-[3px]
-                    text-[11px]
-                    leading-[16px]
-                    text-[var(--neutral-07)]
-                  "
-                >
-                  Usually responds to messages quickly.
-                </p>
-              </div>
+              <span
+                className="
+                  mt-[8px]
+                  text-[14px]
+                  leading-[20px]
+                  text-[var(--shade-02)]
+                "
+              >
+                Host
+              </span>
             </div>
 
-            {/* Detail 2 */}
+            {/* HOST STATS */}
 
-            <div className="flex gap-[12px]">
-              <CalendarCheck
-                size={18}
-                strokeWidth={1.6}
-                className="
-                  shrink-0
-                  text-[var(--shade-02)]
-                "
-              />
-
+            <div
+              className="
+                flex
+                min-w-0
+                flex-1
+                flex-col
+                justify-center
+                pl-[22px]
+              "
+            >
               <div>
-                <h3
+                <span
                   className="
-                    m-0
-                    text-[13px]
+                    block
+                    text-[24px]
                     font-semibold
+                    leading-[30px]
                     text-[var(--shade-02)]
                   "
                 >
-                  Guest favourite
-                </h3>
+                  1,463
+                </span>
 
-                <p
+                <span
                   className="
-                    m-0
-                    mt-[3px]
-                    text-[11px]
-                    leading-[16px]
-                    text-[var(--neutral-07)]
+                    text-[14px]
+                    leading-[20px]
+                    text-[var(--shade-02)]
                   "
                 >
-                  This host has highly rated stays.
-                </p>
+                  Reviews
+                </span>
               </div>
-            </div>
 
-            {/* Detail 3 */}
-
-            <div className="flex gap-[12px]">
-              <ShieldCheck
-                size={18}
-                strokeWidth={1.6}
+              <div
                 className="
-                  shrink-0
-                  text-[var(--shade-02)]
+                  my-[16px]
+                  h-px
+                  w-full
+                  bg-[var(--neutral-02)]
                 "
               />
 
               <div>
-                <h3
+                <span
                   className="
-                    m-0
-                    text-[13px]
+                    block
+                    text-[24px]
                     font-semibold
+                    leading-[30px]
                     text-[var(--shade-02)]
                   "
                 >
-                  Dedicated to guest service
-                </h3>
+                  4.68★
+                </span>
 
-                <p
+                <span
                   className="
-                    m-0
-                    mt-[3px]
-                    text-[11px]
-                    leading-[16px]
-                    text-[var(--neutral-07)]
+                    text-[14px]
+                    leading-[20px]
+                    text-[var(--shade-02)]
                   "
                 >
-                  Focused on making every stay comfortable.
-                </p>
+                  Rating
+                </span>
               </div>
-            </div>
 
-            {/* Detail 4 */}
-
-            <div className="flex gap-[12px]">
-              <MessageCircle
-                size={18}
-                strokeWidth={1.6}
+              <div
                 className="
-                  shrink-0
-                  text-[var(--shade-02)]
+                  my-[16px]
+                  h-px
+                  w-full
+                  bg-[var(--neutral-02)]
                 "
               />
 
               <div>
-                <h3
+                <span
                   className="
-                    m-0
-                    text-[13px]
+                    block
+                    text-[24px]
                     font-semibold
+                    leading-[30px]
                     text-[var(--shade-02)]
                   "
                 >
-                  Communication
-                </h3>
+                  2
+                </span>
 
-                <p
+                <span
                   className="
-                    m-0
-                    mt-[3px]
-                    text-[11px]
-                    leading-[16px]
-                    text-[var(--neutral-07)]
+                    text-[14px]
+                    leading-[20px]
+                    text-[var(--shade-02)]
                   "
                 >
-                  Available before and during your stay.
-                </p>
+                  Years hosting
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Co-hosts */}
+          {/* HOST PERSONAL DETAILS */}
 
-          <div className="mt-[30px]">
-            <h3
-              className="
-                m-0
-                text-[13px]
-                font-semibold
-                text-[var(--shade-02)]
-              "
-            >
-              Co-hosts
-            </h3>
+          <div className="mt-[24px] space-y-[20px]">
+            <div className="flex items-center gap-[16px]">
+              <span className="text-[26px] leading-none">♧</span>
 
-            <div
-              className="
-                mt-[12px]
-                flex
-                flex-wrap
-                gap-[18px]
-              "
-            >
-              {coHosts.map((host) => (
+              <span
+                className="
+                  text-[16px]
+                  leading-[22px]
+                  text-[var(--shade-02)]
+                "
+              >
+                Born in the 80s
+              </span>
+            </div>
+
+            <div className="flex items-center gap-[16px]">
+              <span className="text-[26px] leading-none">♢</span>
+
+              <span
+                className="
+                  text-[16px]
+                  leading-[22px]
+                  text-[var(--shade-02)]
+                "
+              >
+                Where I went to school: NICMAR GOA
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ===================================================
+            RIGHT SIDE
+        =================================================== */}
+
+        <div className="min-w-0">
+          {/* CO-HOSTS */}
+
+          <h3
+            className="
+              m-0
+              text-[24px]
+              font-semibold
+              leading-[30px]
+              text-[var(--shade-02)]
+            "
+          >
+            Co-Hosts
+          </h3>
+
+          <div
+            className="
+              mt-[22px]
+              grid
+              grid-cols-3
+              gap-x-[48px]
+              gap-y-[22px]
+            "
+          >
+            {coHosts.map((host) => (
+              <div
+                key={host.name}
+                className="
+                  flex
+                  items-center
+                  gap-[12px]
+                "
+              >
                 <div
-                  key={host.name}
                   className="
                     flex
+                    h-[38px]
+                    w-[38px]
+                    shrink-0
                     items-center
-                    gap-[7px]
+                    justify-center
+                    overflow-hidden
+                    rounded-full
+                    bg-[var(--accent-01)]
                   "
                 >
-                  <div
-                    className="
-                      h-[32px]
-                      w-[32px]
-                      overflow-hidden
-                      rounded-full
-                      bg-[var(--neutral-02)]
-                    "
-                  >
+                  {host.image ? (
                     <img
                       src={host.image}
                       alt={host.name}
@@ -426,90 +380,113 @@ function HostSection() {
                         object-cover
                       "
                     />
-                  </div>
-
-                  <span
-                    className="
-                      text-[10px]
-                      text-[var(--shade-02)]
-                    "
-                  >
-                    {host.name}
-                  </span>
+                  ) : (
+                    <span
+                      className="
+                        text-[16px]
+                        font-medium
+                        text-[var(--primary-02)]
+                      "
+                    >
+                      {host.name.charAt(0)}
+                    </span>
+                  )}
                 </div>
-              ))}
-            </div>
+
+                <span
+                  className="
+                    text-[16px]
+                    leading-[22px]
+                    text-[var(--shade-02)]
+                  "
+                >
+                  {host.name}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Message button */}
+          {/* HOST DETAILS */}
+
+          <h3
+            className="
+              m-0
+              mt-[34px]
+              text-[24px]
+              font-semibold
+              leading-[30px]
+              text-[var(--shade-02)]
+            "
+          >
+            Host details
+          </h3>
+
+          <div
+            className="
+              mt-[20px]
+              text-[16px]
+              leading-[26px]
+              text-[var(--shade-02)]
+            "
+          >
+            <div>Response rate: 100%</div>
+            <div>Responds within an hour</div>
+          </div>
+
+          {/* MESSAGE */}
 
           <button
             type="button"
             className="
-              mt-[28px]
+              mt-[22px]
               flex
-              h-[42px]
+              h-[56px]
               items-center
               justify-center
-              gap-[8px]
-              rounded-[8px]
-              border
-              border-[var(--shade-02)]
-              bg-[var(--shade-01)]
-              px-[18px]
-              text-[12px]
+              rounded-[10px]
+              border-0
+              bg-[var(--neutral-01)]
+              px-[28px]
+              text-[16px]
               font-semibold
               text-[var(--shade-02)]
               transition-colors
               duration-150
-              hover:bg-[var(--neutral-01)]
+              hover:bg-[var(--neutral-02)]
             "
           >
-            <MessageCircle
-              size={15}
-              strokeWidth={1.7}
-            />
-
             Message host
           </button>
+
+          {/* SAFETY NOTE */}
+
+          <div
+            className="
+              mt-[34px]
+              flex
+              items-center
+              gap-[14px]
+            "
+          >
+            <ShieldCheck
+              size={27}
+              strokeWidth={1.5}
+              className="text-[var(--neutral-07)]"
+            />
+
+            <p
+              className="
+                m-0
+                text-[14px]
+                leading-[20px]
+                text-[var(--neutral-07)]
+              "
+            >
+              To help protect your payment, always use Airbnb
+              to send money and communicate with hosts.
+            </p>
+          </div>
         </div>
-      </div>
-
-      {/* Safety / communication note */}
-
-      <div
-        className="
-          mt-[28px]
-          flex
-          items-start
-          gap-[10px]
-          border-t
-          border-[var(--neutral-02)]
-          pt-[18px]
-        "
-      >
-        <ShieldCheck
-          size={17}
-          strokeWidth={1.6}
-          className="
-            mt-[1px]
-            shrink-0
-            text-[var(--neutral-07)]
-          "
-        />
-
-        <p
-          className="
-            m-0
-            max-w-[720px]
-            text-[10px]
-            leading-[16px]
-            text-[var(--neutral-07)]
-          "
-        >
-          To protect your payment and personal information,
-          always communicate and transact through Airbnb.
-        </p>
       </div>
     </section>
   );

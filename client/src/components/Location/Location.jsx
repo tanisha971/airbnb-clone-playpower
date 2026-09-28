@@ -1,5 +1,5 @@
 import {
-  ChevronDown,
+  ChevronRight,
   LocateFixed,
   MapPin,
   Minus,
@@ -332,7 +332,7 @@ function Location() {
         >
           Show more
 
-          <ChevronDown
+          <ChevronRight
             size={12}
             strokeWidth={2}
           />

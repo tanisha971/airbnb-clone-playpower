@@ -3,12 +3,12 @@ function SleepingArrangements() {
     {
       room: "Bedroom",
       description: "1 double bed",
-      image: "/assets/sleeping/bedroom.jpg",
+      image: "/assets/gallery/18_BR1.avif",
     },
     {
       room: "Living room",
       description: "1 sofa",
-      image: "/assets/sleeping/living-room.jpg",
+      image: "/assets/gallery/01_LR1.avif",
     },
   ];
 
@@ -25,9 +25,10 @@ function SleepingArrangements() {
         className="
           m-0
           mb-[18px]
-          text-[16px]
+          text-[18px]
           font-semibold
-          leading-[22px]
+          leading-[24px]
+          tracking-[-0.01em]
           text-[var(--shade-02)]
         "
       >
@@ -39,11 +40,11 @@ function SleepingArrangements() {
           ({ room, description, image }) => (
             <div
               key={room}
-              className="w-[220px] shrink-0"
+              className="w-[200px] shrink-0"
             >
               <div
                 className="
-                  h-[150px]
+                  h-[135px]
                   w-full
                   overflow-hidden
                   rounded-[8px]
@@ -53,7 +54,12 @@ function SleepingArrangements() {
                 <img
                   src={image}
                   alt={room}
-                  className="h-full w-full object-cover"
+                  className="
+                    block
+                    h-full
+                    w-full
+                    object-cover
+                  "
                 />
               </div>
 
@@ -61,9 +67,9 @@ function SleepingArrangements() {
                 <p
                   className="
                     m-0
-                    text-[12px]
+                    text-[14px]
                     font-semibold
-                    leading-[17px]
+                    leading-[20px]
                     text-[var(--shade-02)]
                   "
                 >
@@ -74,8 +80,9 @@ function SleepingArrangements() {
                   className="
                     m-0
                     mt-[2px]
-                    text-[11px]
-                    leading-[16px]
+                    text-[14px]
+                    font-normal
+                    leading-[20px]
                     text-[var(--neutral-07)]
                   "
                 >
@@ -89,9 +96,5 @@ function SleepingArrangements() {
     </section>
   );
 }
-
-/* =========================================================
-   AMENITIES
-========================================================= */
 
 export default SleepingArrangements;

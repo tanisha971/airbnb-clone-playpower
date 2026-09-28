@@ -33,25 +33,22 @@ function PropertyHighlights() {
     >
       <div className="flex flex-col">
         {highlights.map(
-          ({ icon: Icon, title, description }, index) => (
+          ({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className={`
+              className="
                 flex
                 items-start
                 gap-[18px]
-                py-[16px]
-                ${
-                  index !== highlights.length - 1
-                    ? "border-b border-[var(--neutral-02)]"
-                    : ""
-                }
-              `}
+                py-[10px]
+              "
             >
+              {/* Icon */}
+
               <div
                 className="
                   flex
-                  w-[34px]
+                  w-[28px]
                   shrink-0
                   items-start
                   justify-center
@@ -59,12 +56,23 @@ function PropertyHighlights() {
                   text-[var(--shade-02)]
                 "
               >
-                <Icon size={25} strokeWidth={1.5} />
+                <Icon
+                  size={24}
+                  strokeWidth={1.7}
+                />
               </div>
 
-              <div className="flex flex-col">
-                <span
+              {/* Text */}
+
+              <div
+                className="
+                  min-w-0
+                  flex-1
+                "
+              >
+                <h3
                   className="
+                    m-0
                     text-[16px]
                     font-semibold
                     leading-[22px]
@@ -72,18 +80,20 @@ function PropertyHighlights() {
                   "
                 >
                   {title}
-                </span>
+                </h3>
 
-                <span
+                <p
                   className="
-                    mt-[3px]
+                    m-0
+                    mt-[2px]
                     text-[16px]
+                    font-normal
                     leading-[22px]
                     text-[var(--neutral-07)]
                   "
                 >
                   {description}
-                </span>
+                </p>
               </div>
             </div>
           )

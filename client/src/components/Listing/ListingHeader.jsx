@@ -48,10 +48,12 @@ function ListingHeader() {
         className="
           mx-auto
           flex
-          w-[calc(100%-140px)]
+          w-[calc(100%-80px)]
+          max-w-[1120px]
           items-center
           justify-between
-          py-[14px]
+          pt-[36px]
+          pb-[26px]
         "
       >
         {/* ===================================================
@@ -61,10 +63,11 @@ function ListingHeader() {
         <h1
           className="
             m-0
-            text-[28px]
+            min-w-0
+            text-[30px]
             font-semibold
-            leading-[28px]
-            tracking-[-0.01em]
+            leading-[36px]
+            tracking-[-0.025em]
             text-[var(--shade-02)]
           "
         >
@@ -77,9 +80,11 @@ function ListingHeader() {
 
         <div
           className="
+            ml-[32px]
             flex
+            shrink-0
             items-center
-            gap-[10px]
+            gap-[12px]
           "
         >
           {/* =================================================
@@ -90,16 +95,16 @@ function ListingHeader() {
             type="button"
             className="
               flex
-              h-[34px]
+              h-[36px]
               items-center
-              gap-[6px]
+              gap-[7px]
               rounded-full
               border-0
               bg-transparent
               px-[8px]
               text-[14px]
               font-medium
-              leading-[18px]
+              leading-[20px]
               text-[var(--shade-02)]
               transition-colors
               duration-150
@@ -107,14 +112,15 @@ function ListingHeader() {
             "
           >
             <Share
-              size={16}
+              size={17}
               strokeWidth={1.8}
+              className="shrink-0"
             />
 
             <span
               className="
                 underline
-                underline-offset-[2px]
+                underline-offset-[3px]
               "
             >
               Share
@@ -136,16 +142,16 @@ function ListingHeader() {
             }
             className="
               flex
-              h-[34px]
+              h-[36px]
               items-center
-              gap-[6px]
+              gap-[7px]
               rounded-full
               border-0
               bg-transparent
               px-[8px]
               text-[14px]
               font-medium
-              leading-[18px]
+              leading-[20px]
               text-[var(--shade-02)]
               transition-colors
               duration-150
@@ -153,7 +159,7 @@ function ListingHeader() {
             "
           >
             <Heart
-              size={17}
+              size={18}
               strokeWidth={1.8}
               fill={
                 isSaved
@@ -170,7 +176,7 @@ function ListingHeader() {
             <span
               className="
                 underline
-                underline-offset-[2px]
+                underline-offset-[3px]
               "
             >
               {isSaved ? "Saved" : "Save"}

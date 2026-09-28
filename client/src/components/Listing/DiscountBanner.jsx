@@ -1,10 +1,11 @@
+import {Tag} from "lucide-react";
 function DiscountBanner() {
   return (
     <div
       className="
         mb-[28px]
         flex
-        h-[88px]
+        h-[78px]
         w-full
         items-center
         justify-between
@@ -28,15 +29,7 @@ function DiscountBanner() {
             justify-center
           "
         >
-          <span
-            className="
-              block
-              h-[25px]
-              w-[25px]
-              rounded-[3px]
-              bg-[#65a84a]
-            "
-          />
+          <Tag className="rotate-315 text-[#65a84a]" />
         </div>
 
         <div className="flex flex-col">
@@ -85,6 +78,7 @@ function DiscountBanner() {
           text-[16px]
           font-semibold
           text-[var(--shade-02)]
+          hover:bg-[var(--neutral-02)]
         "
       >
         Claim

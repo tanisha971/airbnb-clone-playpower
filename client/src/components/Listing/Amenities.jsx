@@ -53,15 +53,11 @@ function Amenities() {
     },
     {
       title: "Entertainment",
-      items: [
-        [Home, "TV"],
-      ],
+      items: [[Home, "TV"]],
     },
     {
       title: "Family",
-      items: [
-        [Home, "Cot"],
-      ],
+      items: [[Home, "Cot"]],
     },
     {
       title: "Heating and cooling",
@@ -104,9 +100,7 @@ function Amenities() {
     },
     {
       title: "Location features",
-      items: [
-        [Home, "Private entrance"],
-      ],
+      items: [[Home, "Private entrance"]],
     },
     {
       title: "Outdoor",
@@ -142,19 +136,19 @@ function Amenities() {
         id="amenities"
         className="
           w-full
-    border-b
-    border-[var(--neutral-03)]
-    py-[28px]
+          border-b
+          border-[var(--neutral-03)]
+          py-[28px]
         "
       >
         <h2
           className="
             m-0
-            mb-[28px]
-            text-[28px]
+            mb-[22px]
+            text-[20px]
             font-semibold
-            leading-[34px]
-            tracking-[-0.02em]
+            leading-[26px]
+            tracking-[-0.015em]
             text-[var(--shade-02)]
           "
         >
@@ -166,8 +160,8 @@ function Amenities() {
             grid
             max-w-[760px]
             grid-cols-2
-            gap-x-[80px]
-            gap-y-[24px]
+            gap-x-[56px]
+            gap-y-[16px]
           "
         >
           {amenities.map(([Icon, label, unavailable]) => (
@@ -177,9 +171,9 @@ function Amenities() {
                 flex
                 min-h-[28px]
                 items-center
-                gap-[18px]
-                text-[18px]
-                leading-[24px]
+                gap-[16px]
+                text-[14px]
+                leading-[20px]
                 ${
                   unavailable
                     ? "text-[var(--neutral-07)] line-through"
@@ -188,8 +182,8 @@ function Amenities() {
               `}
             >
               <Icon
-                size={26}
-                strokeWidth={1.5}
+                size={20}
+                strokeWidth={1.7}
                 className="shrink-0"
               />
 
@@ -202,15 +196,19 @@ function Amenities() {
           type="button"
           onClick={() => setShowAllAmenities(true)}
           className="
-            mt-[32px]
-            h-[52px]
-            rounded-[10px]
+            mt-[24px]
+            flex
+            h-[44px]
+            items-center
+            justify-center
+            rounded-[8px]
             border
             border-[var(--shade-02)]
             bg-[var(--shade-01)]
-            px-[28px]
-            text-[16px]
+            px-[20px]
+            text-[14px]
             font-semibold
+            leading-[20px]
             text-[var(--shade-02)]
             transition-colors
             duration-150
@@ -245,9 +243,9 @@ function Amenities() {
             className="
               relative
               flex
-              h-[745px]
+              h-[650px]
               w-full
-              max-w-[915px]
+              max-w-[800px]
               flex-col
               overflow-hidden
               rounded-[16px]
@@ -255,42 +253,60 @@ function Amenities() {
               shadow-[0_12px_40px_rgba(0,0,0,0.20)]
             "
           >
-            {/* Close */}
-            <button
-              type="button"
-              onClick={() => setShowAllAmenities(false)}
-              aria-label="Close amenities"
+            {/* =====================================================
+                FIXED MODAL HEADER
+                X BUTTON STAYS IN PLACE WHILE CONTENT SCROLLS
+            ===================================================== */}
+
+            <div
               className="
                 absolute
-                left-[24px]
-                top-[24px]
+                left-0
+                right-0
+                top-0
                 z-20
-                flex
-                h-[40px]
-                w-[40px]
-                items-center
-                justify-center
-                rounded-full
-                border-0
-                bg-transparent
-                text-[var(--shade-02)]
-                transition-colors
-                hover:bg-[var(--neutral-01)]
+                h-[68px]
+                bg-[var(--shade-01)]
               "
             >
-              <span className="text-[30px] font-light leading-none">
-                ×
-              </span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setShowAllAmenities(false)}
+                aria-label="Close amenities"
+                className="
+                  absolute
+                  left-[24px]
+                  top-[20px]
+                  flex
+                  h-[40px]
+                  w-[40px]
+                  items-center
+                  justify-center
+                  rounded-full
+                  border-0
+                  bg-transparent
+                  text-[var(--shade-02)]
+                  transition-colors
+                  hover:bg-[var(--neutral-01)]
+                "
+              >
+                <span className="text-[30px] font-light leading-none">
+                  ×
+                </span>
+              </button>
+            </div>
 
-            {/* Scrollable content */}
+            {/* =====================================================
+                SCROLLABLE CONTENT
+            ===================================================== */}
+
             <div
               className="
                 h-full
                 overflow-y-auto
                 px-[56px]
                 pb-[60px]
-                pt-[86px]
+                pt-[68px]
               "
             >
               <h2
@@ -307,72 +323,68 @@ function Amenities() {
                 What this place offers
               </h2>
 
-              {amenityCategories.map(
-                ({ title, items }) => (
-                  <section
-                    key={title}
-                    className="mb-[34px]"
+              {amenityCategories.map(({ title, items }) => (
+                <section
+                  key={title}
+                  className="mb-[34px]"
+                >
+                  <h3
+                    className="
+                      m-0
+                      mb-[12px]
+                      text-[20px]
+                      font-semibold
+                      leading-[26px]
+                      text-[var(--shade-02)]
+                    "
                   >
-                    <h3
-                      className="
-                        m-0
-                        mb-[12px]
-                        text-[20px]
-                        font-semibold
-                        leading-[26px]
-                        text-[var(--shade-02)]
-                      "
-                    >
-                      {title}
-                    </h3>
+                    {title}
+                  </h3>
 
-                    <div>
-                      {items.map(
-                        ([Icon, label, unavailable]) => (
-                          <div
-                            key={`${title}-${label}`}
-                            className="
-                              flex
-                              min-h-[66px]
-                              items-center
-                              gap-[18px]
-                              border-b
-                              border-[var(--neutral-02)]
-                            "
-                          >
-                            <Icon
-                              size={27}
-                              strokeWidth={1.5}
-                              className={`
-                                shrink-0
-                                ${
-                                  unavailable
-                                    ? "text-[var(--neutral-06)]"
-                                    : "text-[var(--shade-02)]"
-                                }
-                              `}
-                            />
+                  <div>
+                    {items.map(([Icon, label, unavailable]) => (
+                      <div
+                        key={`${title}-${label}`}
+                        className="
+                          flex
+                          min-h-[66px]
+                          items-center
+                          gap-[18px]
+                          border-b
+                          border-[var(--neutral-02)]
+                        "
+                      >
+                        <Icon
+                          size={27}
+                          strokeWidth={1.5}
+                          className={`
+                            shrink-0
+                            ${
+                              unavailable
+                                ? "text-[var(--neutral-06)]"
+                                : "text-[var(--shade-02)]"
+                            }
+                          `}
+                        />
 
-                            <span
-                              className={`
-                                text-[18px]
-                                leading-[24px]
-                                ${
-                                  unavailable
-                                    ? "text-[var(--neutral-07)] line-through"
-                                    : "text-[var(--shade-02)]"
-                                }
-                              `}
-                            >
-                              {label}
-                            </span>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </section>
-                )
-              )}
+                        <span
+                          className={`
+                            text-[18px]
+                            leading-[24px]
+                            ${
+                              unavailable
+                                ? "text-[var(--neutral-07)] line-through"
+                                : "text-[var(--shade-02)]"
+                            }
+                          `}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
             </div>
           </div>
         </div>
@@ -380,9 +392,5 @@ function Amenities() {
     </>
   );
 }
-
-/* =========================================================
-   AVAILABILITY CALENDAR
-========================================================= */
 
 export default Amenities;

@@ -23,11 +23,11 @@ function AvailabilityCalendar() {
     <div className="w-full">
       <div
         className="
-          mb-[16px]
+          mb-[12px]
           text-center
-          text-[20px]
+          text-[16px]
           font-semibold
-          leading-[26px]
+          leading-[22px]
           text-[var(--shade-02)]
         "
       >
@@ -40,11 +40,12 @@ function AvailabilityCalendar() {
             key={`${day}-${index}`}
             className="
               flex
-              h-[30px]
+              h-[28px]
               items-center
               justify-center
               text-[12px]
               font-medium
+              leading-[16px]
               text-[var(--shade-02)]
             "
           >
@@ -74,11 +75,20 @@ function AvailabilityCalendar() {
 
               const isUnavailable =
                 month === "November 2026" &&
-                ["18", "19", "20", "21", "22", "23", "24", "29", "30"].includes(
-                  day
-                );
+                [
+                  "18",
+                  "19",
+                  "20",
+                  "21",
+                  "22",
+                  "23",
+                  "24",
+                  "29",
+                  "30",
+                ].includes(day);
 
-              const isSelected = isCheckIn || isCheckOut;
+              const isSelected =
+                isCheckIn || isCheckOut;
 
               return (
                 <div
@@ -86,7 +96,7 @@ function AvailabilityCalendar() {
                   className="
                     relative
                     flex
-                    h-[44px]
+                    h-[40px]
                     items-center
                     justify-center
                   "
@@ -109,12 +119,13 @@ function AvailabilityCalendar() {
                         relative
                         z-10
                         flex
-                        h-[36px]
-                        w-[36px]
+                        h-[34px]
+                        w-[34px]
                         items-center
                         justify-center
                         rounded-full
-                        text-[14px]
+                        text-[13px]
+                        leading-[18px]
                         ${
                           isSelected
                             ? "bg-[var(--shade-02)] font-semibold text-[var(--shade-01)]"
@@ -142,16 +153,17 @@ function AvailabilityCalendar() {
         w-full
         border-b
         border-[var(--neutral-03)]
-        py-[32px]
+        py-[28px]
       "
     >
       <div>
         <h2
           className="
             m-0
-            text-[28px]
+            text-[20px]
             font-semibold
-            leading-[34px]
+            leading-[26px]
+            tracking-[-0.015em]
             text-[var(--shade-02)]
           "
         >
@@ -161,9 +173,9 @@ function AvailabilityCalendar() {
         <p
           className="
             m-0
-            mt-[8px]
-            text-[16px]
-            leading-[22px]
+            mt-[4px]
+            text-[14px]
+            leading-[20px]
             text-[var(--neutral-07)]
           "
         >
@@ -173,61 +185,77 @@ function AvailabilityCalendar() {
 
       <div
         className="
-          mt-[28px]
+          mt-[24px]
           grid
-          grid-cols-[40px_minmax(0,1fr)_minmax(0,1fr)_40px]
+          grid-cols-[32px_minmax(0,1fr)_minmax(0,1fr)_32px]
           items-start
-          gap-[12px]
+          gap-[8px]
         "
       >
         <button
           type="button"
           aria-label="Previous month"
           className="
-            mt-[8px]
+            mt-[4px]
             flex
-            h-[40px]
-            w-[40px]
+            h-[34px]
+            w-[34px]
             items-center
             justify-center
             rounded-full
             border-0
             bg-transparent
             text-[var(--shade-02)]
+            transition-colors
+            duration-150
             hover:bg-[var(--neutral-01)]
           "
         >
-          <ChevronLeft size={24} strokeWidth={1.5} />
+          <ChevronLeft
+            size={20}
+            strokeWidth={1.7}
+          />
         </button>
 
-        {renderCalendar("October 2026", octoberWeeks)}
+        {renderCalendar(
+          "October 2026",
+          octoberWeeks
+        )}
 
-        {renderCalendar("November 2026", novemberWeeks)}
+        {renderCalendar(
+          "November 2026",
+          novemberWeeks
+        )}
 
         <button
           type="button"
           aria-label="Next month"
           className="
-            mt-[8px]
+            mt-[4px]
             flex
-            h-[40px]
-            w-[40px]
+            h-[34px]
+            w-[34px]
             items-center
             justify-center
             rounded-full
             border-0
             bg-transparent
             text-[var(--shade-02)]
+            transition-colors
+            duration-150
             hover:bg-[var(--neutral-01)]
           "
         >
-          <ChevronRight size={24} strokeWidth={1.5} />
+          <ChevronRight
+            size={20}
+            strokeWidth={1.7}
+          />
         </button>
       </div>
 
       <div
         className="
-          mt-[22px]
+          mt-[18px]
           flex
           items-center
           justify-between
@@ -239,7 +267,7 @@ function AvailabilityCalendar() {
           className="
             flex
             h-[28px]
-            w-[38px]
+            w-[36px]
             items-center
             justify-center
             rounded-[6px]
@@ -249,7 +277,9 @@ function AvailabilityCalendar() {
             text-[var(--shade-02)]
           "
         >
-          <span className="text-[14px] leading-none">⌨</span>
+          <span className="text-[13px] leading-none">
+            ⌨
+          </span>
         </button>
 
         <button
@@ -258,8 +288,9 @@ function AvailabilityCalendar() {
             border-0
             bg-transparent
             p-0
-            text-[16px]
+            text-[14px]
             font-semibold
+            leading-[20px]
             text-[var(--shade-02)]
             underline
             underline-offset-[3px]
@@ -271,9 +302,5 @@ function AvailabilityCalendar() {
     </section>
   );
 }
-
-/* =========================================================
-   DISCOUNT BANNER
-========================================================= */
 
 export default AvailabilityCalendar;

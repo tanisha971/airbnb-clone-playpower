@@ -16,6 +16,7 @@ function PhotoGrid({ onShowAllPhotos }) {
     relative
     mx-auto
     w-[calc(100%-140px)]
+    max-w-[1120px]
   "
 >
       <div

@@ -5,64 +5,6 @@ function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("photos");
 
-  useEffect(() => {
-    const sections = ["photos", "amenities", "reviews", "location"];
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // Sticky navbar state
-      setIsScrolled(scrollY > 500);
-
-      // Detect currently visible section
-      let currentSection = "photos";
-
-      sections.forEach((sectionId) => {
-        const section = document.getElementById(sectionId);
-
-        if (!section) return;
-
-        const rect = section.getBoundingClientRect();
-
-        // Navbar height + small visual offset
-        if (rect.top <= 140) {
-          currentSection = sectionId;
-        }
-      });
-
-      setActiveSection(currentSection);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Set initial state
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const handleSectionClick = (sectionId) => {
-    const section = document.getElementById(sectionId);
-
-    if (!section) return;
-
-    const navbarOffset = 80;
-
-    const sectionTop =
-      section.getBoundingClientRect().top +
-      window.scrollY -
-      navbarOffset;
-
-    window.scrollTo({
-      top: sectionTop,
-      behavior: "smooth",
-    });
-
-    setActiveSection(sectionId);
-  };
-
   const navItems = [
     {
       id: "photos",
@@ -82,9 +24,79 @@ function Navbar() {
     },
   ];
 
+  useEffect(() => {
+    const sections = navItems.map((item) => item.id);
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      /*
+       * Reference behavior:
+       * The compact navbar appears after the user has
+       * scrolled past the main photo/header area.
+       */
+      setIsScrolled(scrollY > 500);
+
+      /*
+       * Scroll spy.
+       *
+       * 100px accounts for the compact sticky navbar
+       * plus a small visual buffer.
+       */
+      let currentSection = "photos";
+
+      sections.forEach((sectionId) => {
+        const section = document.getElementById(sectionId);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 100) {
+          currentSection = sectionId;
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleSectionClick = (sectionId) => {
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    /*
+     * The reference compact navbar is approximately 78px high.
+     */
+    const navbarOffset = 78;
+
+    const sectionTop =
+      section.getBoundingClientRect().top +
+      window.scrollY -
+      navbarOffset;
+
+    window.scrollTo({
+      top: Math.max(0, sectionTop),
+      behavior: "smooth",
+    });
+
+    setActiveSection(sectionId);
+  };
+
   return (
     <header
-      className={`
+      className="
         sticky
         top-0
         z-50
@@ -92,24 +104,22 @@ function Navbar() {
         border-b
         border-[var(--neutral-02)]
         bg-[var(--shade-01)]
-        transition-all
-        duration-200
-        ${
-          isScrolled
-            ? "h-[64px]"
-            : "h-[100px]"
-        }
-      `}
+      "
     >
       {!isScrolled ? (
+        /* =====================================================
+           INITIAL NAVBAR
+        ===================================================== */
+
         <div
           className="
-            relative
             mx-auto
             flex
-            h-full
-            w-[calc(100%-120px)]
+            h-[90px]
+            w-[calc(100%-180px)]
+            max-w-[1600px]
             items-center
+            justify-between
           "
         >
           {/* =================================================
@@ -120,11 +130,8 @@ function Navbar() {
             href="/"
             aria-label="Airbnb home"
             className="
-              absolute
-              left-0
-              top-1/2
               flex
-              -translate-y-1/2
+              shrink-0
               items-center
             "
           >
@@ -134,7 +141,7 @@ function Navbar() {
               className="
                 block
                 h-auto
-                w-[128px]
+                w-[125px]
               "
             />
           </a>
@@ -147,12 +154,11 @@ function Navbar() {
             className="
               absolute
               left-1/2
-              top-1/2
+              
               flex
               h-[50px]
-              w-[420px]
+              w-[476px]
               -translate-x-1/2
-              -translate-y-1/2
               items-center
               rounded-full
               border
@@ -166,11 +172,12 @@ function Navbar() {
             <div
               className="
                 flex
-                h-[48px]
-                w-[64px]
+                h-full
+                w-[72px]
                 shrink-0
                 items-center
                 justify-center
+                ml-[7px]
               "
             >
               <img
@@ -190,17 +197,18 @@ function Navbar() {
               type="button"
               className="
                 flex
-                h-[40px]
-                w-[104px]
+                h-[38px]
+                w-[105px]
                 shrink-0
                 items-center
                 justify-center
                 border-r
                 border-[var(--neutral-03)]
                 bg-transparent
-                px-0
-                text-[14px]
-                font-normal
+                p-0
+                text-[16px]
+                font-medium
+                leading-[20px]
                 text-[var(--shade-02)]
                 transition-colors
                 duration-150
@@ -216,17 +224,18 @@ function Navbar() {
               type="button"
               className="
                 flex
-                h-[40px]
-                w-[111px]
+                h-[38px]
+                w-[106px]
                 shrink-0
                 items-center
                 justify-center
                 border-r
                 border-[var(--neutral-03)]
                 bg-transparent
-                px-0
-                text-[14px]
-                font-normal
+                p-0
+                text-[16px]
+                font-medium
+                leading-[20px]
                 text-[var(--shade-02)]
                 transition-colors
                 duration-150
@@ -242,16 +251,17 @@ function Navbar() {
               type="button"
               className="
                 flex
-                h-[40px]
+                h-[38px]
                 min-w-0
                 flex-1
                 items-center
                 justify-center
                 bg-transparent
-                px-0
-                text-[14px]
+                p-0
+                text-[16px]
                 font-normal
-                text-[var(--shade-02)]
+                leading-[20px]
+                text-[var(--neutral-07)]
                 transition-colors
                 duration-150
                 hover:bg-[var(--neutral-01)]
@@ -268,8 +278,8 @@ function Navbar() {
               className="
                 mr-[7px]
                 flex
-                h-[40px]
-                w-[40px]
+                h-[36px]
+                w-[36px]
                 shrink-0
                 items-center
                 justify-center
@@ -285,8 +295,8 @@ function Navbar() {
               "
             >
               <Search
-                size={17}
-                strokeWidth={3}
+                size={18}
+                strokeWidth={2.8}
               />
             </button>
           </div>
@@ -297,12 +307,8 @@ function Navbar() {
 
           <div
             className="
-              absolute
-              right-0
-              top-1/2
               flex
-              h-[40px]
-              -translate-y-1/2
+              shrink-0
               items-center
             "
           >
@@ -312,17 +318,16 @@ function Navbar() {
               type="button"
               className="
                 flex
-                h-[40px]
+                h-[48px]
                 items-center
                 justify-center
                 rounded-full
                 border-0
                 bg-transparent
-                px-[12px]
-                py-[11px]
-                text-[14px]
-                font-normal
-                leading-[18px]
+                px-[14px]
+                text-[15px]
+                font-medium
+                leading-[20px]
                 text-[var(--shade-02)]
                 transition-colors
                 duration-150
@@ -338,10 +343,10 @@ function Navbar() {
               type="button"
               aria-label="Choose language"
               className="
-                ml-[16px]
+                ml-[12px]
                 flex
-                h-[40px]
-                w-[40px]
+                h-[48px]
+                w-[48px]
                 shrink-0
                 items-center
                 justify-center
@@ -356,7 +361,7 @@ function Navbar() {
               "
             >
               <Globe
-                size={20}
+                size={21}
                 strokeWidth={2}
               />
             </button>
@@ -369,8 +374,8 @@ function Navbar() {
               className="
                 ml-[8px]
                 flex
-                h-[40px]
-                w-[40px]
+                h-[48px]
+                w-[48px]
                 shrink-0
                 items-center
                 justify-center
@@ -385,7 +390,7 @@ function Navbar() {
               "
             >
               <Menu
-                size={16}
+                size={19}
                 strokeWidth={2}
               />
             </button>
@@ -400,20 +405,23 @@ function Navbar() {
           className="
             mx-auto
             flex
-            h-full
-            w-[calc(100%-120px)]
+            h-[72px]
+            w-[calc(100%-80px)]
+            max-w-[1120px]
             items-center
             justify-between
           "
         >
-          {/* LEFT SECTION NAVIGATION */}
+          {/* =================================================
+              LEFT SECTION NAVIGATION
+          ================================================= */}
 
           <nav
             className="
               flex
               h-full
               items-center
-              gap-[28px]
+              gap-[27px]
             "
           >
             {navItems.map((item) => {
@@ -435,14 +443,15 @@ function Navbar() {
                     border-0
                     bg-transparent
                     p-0
-                    text-[14px]
-                    no-underline
+                    font-semibold
+                    text-[30px]
+                    leading-[30px]
                     transition-colors
                     duration-150
                     ${
                       isActive
-                        ? "font-semibold text-[var(--shade-02)]"
-                        : "font-medium text-[var(--neutral-07)]"
+                        ? "font-normal text-[var(--shade-02)]"
+                        : "font-bold text-[var(--shade-02)]"
                     }
                   `}
                 >
@@ -452,7 +461,7 @@ function Navbar() {
                     <span
                       className="
                         absolute
-                        bottom-0
+                        bottom-[16px]
                         left-0
                         right-0
                         h-[2px]
@@ -465,33 +474,43 @@ function Navbar() {
             })}
           </nav>
 
-          {/* RIGHT */}
+          {/* =================================================
+              RIGHT SIDE
+          ================================================= */}
 
-          <div className="flex items-center gap-[20px]">
+          <div
+            className="
+              flex
+              items-center
+              gap-[20px]
+            "
+          >
             <div
               className="
+                min-w-[170px]
                 text-right
-                text-[13px]
+                text-[16px]
+                leading-[20px]
                 text-[var(--shade-02)]
               "
             >
               <div>
-                <span className="font-semibold underline">
+                <span className="font-semibold">
                   ₹28,499
                 </span>{" "}
                 for 5 nights
               </div>
 
-              <small
+              <div
                 className="
-                  mt-[4px]
-                  block
-                  text-[12px]
-                  text-[var(--neutral-07)]
+                  mt-[3px]
+                  text-[14px]
+                  leading-[18px]
+                  text-[var(--shade-02)]
                 "
               >
                 ★ 4.95 · 19 reviews
-              </small>
+              </div>
             </div>
 
             <button
@@ -499,15 +518,16 @@ function Navbar() {
               className="
                 flex
                 h-[48px]
-                min-w-[116px]
+                min-w-[110px]
                 items-center
                 justify-center
                 rounded-full
                 border-0
                 bg-[var(--primary-02)]
                 px-[24px]
-                text-[14px]
+                text-[16px]
                 font-semibold
+                leading-[20px]
                 text-white
                 transition-all
                 duration-150

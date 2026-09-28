@@ -124,14 +124,15 @@ function Reviews() {
       id="reviews"
       className="
         mx-auto
-        w-[calc(100%-180px)]
+        w-[calc(100%-80px)]
         max-w-[1120px]
         border-b
         border-[var(--neutral-03)]
         py-[48px]
       "
     >
-      {/* Main rating */}
+      {/* MAIN RATING */}
+
       <div className="text-center">
         <div className="flex justify-center">
           <img
@@ -139,19 +140,17 @@ function Reviews() {
             alt="4.95 Guest favourite"
             className="
               block
-              h-[150px]
-              w-[470px]
+              h-[120px]
+              w-[420px]
               object-contain
             "
           />
         </div>
 
-        
-
         <p
           className="
             mx-auto
-            mt-[10px]
+            mt-[8px]
             max-w-[430px]
             text-[16px]
             leading-[22px]
@@ -165,12 +164,13 @@ function Reviews() {
         <button
           type="button"
           className="
-            mt-[14px]
+            mt-[12px]
             border-0
             bg-transparent
             p-0
-            text-[16px]
-            font-medium
+            text-[14px]
+            font-semibold
+            leading-[20px]
             text-[var(--shade-02)]
             underline
             underline-offset-[3px]
@@ -180,7 +180,7 @@ function Reviews() {
         </button>
       </div>
 
-      {/* Rating breakdown */}
+      {/* RATING BREAKDOWN */}
 
       <div
         className="
@@ -200,15 +200,16 @@ function Reviews() {
               key={label}
               className="
                 flex
-                min-h-[90px]
+                min-h-[94px]
                 flex-col
-                px-[18px]
+                px-[20px]
               "
             >
               <span
                 className="
-                  text-[10px]
+                  text-[13px]
                   font-medium
+                  leading-[18px]
                   text-[var(--shade-02)]
                 "
               >
@@ -216,20 +217,21 @@ function Reviews() {
               </span>
 
               {bars ? (
-                <div className="mt-[10px] space-y-[3px]">
+                <div className="mt-[10px] space-y-[4px]">
                   {[5, 4, 3, 2, 1].map((number) => (
                     <div
                       key={number}
                       className="
                         flex
                         items-center
-                        gap-[5px]
+                        gap-[6px]
                       "
                     >
                       <span
                         className="
                           w-[8px]
-                          text-[8px]
+                          text-[9px]
+                          leading-[12px]
                           text-[var(--neutral-07)]
                         "
                       >
@@ -238,8 +240,9 @@ function Reviews() {
 
                       <div
                         className="
-                          h-[2px]
+                          h-[3px]
                           flex-1
+                          overflow-hidden
                           rounded-full
                           bg-[var(--neutral-02)]
                         "
@@ -268,8 +271,9 @@ function Reviews() {
                   <span
                     className="
                       mt-[8px]
-                      text-[14px]
+                      text-[16px]
                       font-semibold
+                      leading-[22px]
                       text-[var(--shade-02)]
                     "
                   >
@@ -281,7 +285,7 @@ function Reviews() {
                       size={19}
                       strokeWidth={1.5}
                       className="
-                        mt-[7px]
+                        mt-[6px]
                         text-[var(--shade-02)]
                       "
                     />
@@ -293,7 +297,7 @@ function Reviews() {
         )}
       </div>
 
-      {/* Review category pills */}
+      {/* REVIEW CATEGORY PILLS */}
 
       <div
         className="
@@ -309,19 +313,20 @@ function Reviews() {
               key={label}
               className="
                 flex
-                h-[34px]
+                h-[36px]
                 items-center
-                gap-[6px]
+                gap-[7px]
                 rounded-full
                 border
                 border-[var(--neutral-03)]
-                px-[12px]
-                text-[11px]
+                px-[14px]
+                text-[13px]
+                leading-[18px]
                 text-[var(--shade-02)]
               "
             >
               <Icon
-                size={12}
+                size={14}
                 strokeWidth={1.6}
               />
 
@@ -335,42 +340,42 @@ function Reviews() {
         )}
       </div>
 
-      {/* Reviews */}
+      {/* REVIEWS */}
 
       <div
         className="
           grid
           grid-cols-2
-          gap-x-[64px]
-          gap-y-[38px]
+          gap-x-[80px]
+          gap-y-[42px]
         "
       >
         {reviews.map((review) => (
           <article
             key={review.name}
-            className="min-h-[125px]"
+            className="min-h-[145px]"
           >
-            {/* Reviewer */}
+            {/* REVIEWER */}
 
             <div
               className="
                 flex
                 items-center
-                gap-[10px]
+                gap-[12px]
               "
             >
               <div
                 className="
                   flex
-                  h-[38px]
-                  w-[38px]
+                  h-[44px]
+                  w-[44px]
                   shrink-0
                   items-center
                   justify-center
                   overflow-hidden
                   rounded-full
                   bg-[var(--accent-01)]
-                  text-[13px]
+                  text-[14px]
                   font-semibold
                   text-[var(--shade-02)]
                 "
@@ -394,8 +399,9 @@ function Reviews() {
                 <h3
                   className="
                     m-0
-                    text-[12px]
+                    text-[14px]
                     font-semibold
+                    leading-[20px]
                     text-[var(--shade-02)]
                   "
                 >
@@ -406,7 +412,8 @@ function Reviews() {
                   className="
                     m-0
                     mt-[2px]
-                    text-[10px]
+                    text-[12px]
+                    leading-[17px]
                     text-[var(--neutral-07)]
                   "
                 >
@@ -415,15 +422,16 @@ function Reviews() {
               </div>
             </div>
 
-            {/* Rating + date */}
+            {/* RATING + DATE */}
 
             <div
               className="
                 mt-[10px]
                 flex
                 items-center
-                gap-[6px]
-                text-[10px]
+                gap-[7px]
+                text-[12px]
+                leading-[17px]
                 text-[var(--shade-02)]
               "
             >
@@ -436,14 +444,14 @@ function Reviews() {
               <span>{review.date}</span>
             </div>
 
-            {/* Comment */}
+            {/* COMMENT */}
 
             <p
               className="
                 m-0
-                mt-[7px]
-                text-[11px]
-                leading-[17px]
+                mt-[8px]
+                text-[14px]
+                leading-[21px]
                 text-[var(--shade-02)]
               "
             >
@@ -454,15 +462,16 @@ function Reviews() {
               <button
                 type="button"
                 className="
-                  mt-[5px]
+                  mt-[6px]
                   border-0
                   bg-transparent
                   p-0
-                  text-[11px]
+                  text-[14px]
                   font-semibold
+                  leading-[20px]
                   text-[var(--shade-02)]
                   underline
-                  underline-offset-[2px]
+                  underline-offset-[3px]
                 "
               >
                 Show more
@@ -472,20 +481,24 @@ function Reviews() {
         ))}
       </div>
 
-      {/* Show all reviews */}
+      {/* SHOW ALL REVIEWS */}
 
       <button
         type="button"
         className="
-          mt-[34px]
-          h-[42px]
+          mt-[36px]
+          flex
+          h-[44px]
+          items-center
+          justify-center
           rounded-[8px]
           border
           border-[var(--shade-02)]
           bg-[var(--shade-01)]
-          px-[18px]
-          text-[12px]
+          px-[20px]
+          text-[14px]
           font-semibold
+          leading-[20px]
           text-[var(--shade-02)]
           transition-colors
           duration-150

@@ -1,12 +1,5 @@
+import { CalendarDays, ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import {
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  PawPrint,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
 
 function FooterInfo() {
   const [nearbyPage, setNearbyPage] = useState(0);
@@ -14,25 +7,25 @@ function FooterInfo() {
   const nearbyStayPages = [
     [
       {
-        image: "/assets/gallery/pool.avif",
+        image: "/assets/gallery/studio1.webp",
         title: "Beautiful Studio with a view to die for",
         price: "₹23,600",
         rating: "4.91",
       },
       {
-        image: "/assets/gallery/39.avif",
+        image: "/assets/gallery/pool3.jpg",
         title: "NAQAB - 1bhk with private pool",
         price: "₹42,218",
         rating: "4.95",
       },
       {
-        image: "/assets/gallery/46.avif",
+        image: "/assets/gallery/pool2.avif",
         title: "Greentique Luxury Flat with plunge pool, Calangute",
         price: "₹44,506",
         rating: "4.94",
       },
       {
-        image: "/assets/gallery/pool2.avif",
+        image: "/assets/gallery/beach.webp",
         title: "The Tropical Studio | 5 mins to Beach",
         price: "₹22,824",
         rating: "4.96",
@@ -65,7 +58,7 @@ function FooterInfo() {
         rating: "5.0",
       },
       {
-        image: "/assets/gallery/39.avif",
+        image: "/assets/gallery/26_BR9.avif",
         title: "Luxury Apt | Private Pool | 6 Mins from Beach",
         price: "₹48,786",
         rating: "4.93",
@@ -80,7 +73,6 @@ function FooterInfo() {
   ];
 
   const currentStays = nearbyStayPages[nearbyPage];
-
   const totalPages = nearbyStayPages.length;
 
   const goToPreviousPage = () => {
@@ -96,163 +88,60 @@ function FooterInfo() {
   };
 
   return (
-    <footer>
+    <footer className="w-full bg-[var(--shade-01)]">
       {/* =====================================================
-          BOTTOM LISTING NAVIGATION
-      ===================================================== */}
-
-      <div
-        className="
-          border-b
-          border-[var(--neutral-03)]
-          bg-[var(--shade-01)]
-        "
-      >
-        <div
-          className="
-            mx-auto
-            flex
-            w-[calc(100%-180px)]
-            max-w-[1120px]
-            items-center
-            justify-between
-            py-[16px]
-          "
-        >
-          <nav className="flex items-center gap-[24px]">
-            <a
-              href="#photos"
-              className="
-                text-[11px]
-                font-medium
-                text-[var(--shade-02)]
-                no-underline
-              "
-            >
-              Photos
-            </a>
-
-            <a
-              href="#amenities"
-              className="
-                text-[11px]
-                font-medium
-                text-[var(--shade-02)]
-                no-underline
-              "
-            >
-              Amenities
-            </a>
-
-            <a
-              href="#reviews"
-              className="
-                text-[11px]
-                font-medium
-                text-[var(--shade-02)]
-                no-underline
-              "
-            >
-              Reviews
-            </a>
-
-            <a
-              href="#location"
-              className="
-                text-[11px]
-                font-medium
-                text-[var(--shade-02)]
-                no-underline
-              "
-            >
-              Location
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-[16px]">
-            <div className="text-right">
-              <div
-                className="
-                  text-[11px]
-                  font-semibold
-                  text-[var(--shade-02)]
-                "
-              >
-                ₹28,499{" "}
-                <span className="font-normal">
-                  for 5 nights
-                </span>
-              </div>
-
-              <div
-                className="
-                  mt-[2px]
-                  text-[9px]
-                  text-[var(--neutral-07)]
-                "
-              >
-                ★ 4.95 · 19 reviews
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="
-                h-[34px]
-                min-w-[76px]
-                rounded-full
-                border-0
-                bg-[var(--primary-02)]
-                px-[16px]
-                text-[11px]
-                font-semibold
-                text-[var(--shade-01)]
-                transition-all
-                duration-150
-                hover:brightness-95
-              "
-            >
-              Reserve
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* =====================================================
-          POLICIES
+          THINGS TO KNOW
       ===================================================== */}
 
       <section
         className="
           mx-auto
-          w-[calc(100%-180px)]
+          w-[calc(100%-80px)]
           max-w-[1120px]
           border-b
           border-[var(--neutral-03)]
-          py-[32px]
+          py-[48px]
         "
       >
-        <div
+        <h2
           className="
-            grid
-            grid-cols-3
-            gap-[64px]
+            m-0
+            text-[26px]
+            font-semibold
+            leading-[32px]
+            tracking-[-0.02em]
+            text-[var(--shade-02)]
           "
         >
-          {/* Cancellation */}
+          Things to know
+        </h2>
+
+        <div
+          className="
+            mt-[30px]
+            grid
+            grid-cols-3
+            gap-[72px]
+          "
+        >
+          {/* CANCELLATION POLICY */}
 
           <div>
             <CalendarDays
-              size={28}
+              size={27}
               strokeWidth={1.5}
-              className="mb-[18px] text-[var(--shade-02)]"
+              className="
+                mb-[20px]
+                text-[var(--shade-02)]
+              "
             />
 
             <h3
               className="
                 m-0
-                text-[13px]
+                text-[18px]
                 font-semibold
+                leading-[24px]
                 text-[var(--shade-02)]
               "
             >
@@ -262,9 +151,9 @@ function FooterInfo() {
             <p
               className="
                 m-0
-                mt-[10px]
-                text-[10px]
-                leading-[17px]
+                mt-[16px]
+                text-[16px]
+                leading-[25px]
                 text-[var(--shade-02)]
               "
             >
@@ -273,37 +162,62 @@ function FooterInfo() {
               for a partial refund.
             </p>
 
+            <p
+              className="
+                m-0
+                mt-[10px]
+                text-[16px]
+                leading-[25px]
+                text-[var(--shade-02)]
+              "
+            >
+              Review this host&apos;s full policy for details.
+            </p>
+
             <button
               type="button"
               className="
-                mt-[4px]
+                mt-[8px]
                 border-0
                 bg-transparent
                 p-0
-                text-[10px]
+                text-[16px]
                 font-semibold
+                leading-[22px]
                 text-[var(--shade-02)]
                 underline
+                underline-offset-[3px]
               "
             >
               Learn more
             </button>
           </div>
 
-          {/* House rules */}
+          {/* HOUSE RULES */}
 
           <div>
-            <Sparkles
-              size={28}
-              strokeWidth={1.5}
-              className="mb-[18px] text-[var(--shade-02)]"
-            />
+            <span
+              className="
+                mb-[20px]
+                flex
+                h-[27px]
+                w-[27px]
+                items-center
+                justify-center
+                text-[25px]
+                leading-none
+                text-[var(--shade-02)]
+              "
+            >
+              ⚿
+            </span>
 
             <h3
               className="
                 m-0
-                text-[13px]
+                text-[18px]
                 font-semibold
+                leading-[24px]
                 text-[var(--shade-02)]
               "
             >
@@ -312,10 +226,10 @@ function FooterInfo() {
 
             <div
               className="
-                mt-[10px]
-                space-y-[7px]
-                text-[10px]
-                leading-[17px]
+                mt-[16px]
+                space-y-[8px]
+                text-[16px]
+                leading-[25px]
                 text-[var(--shade-02)]
               "
             >
@@ -327,28 +241,30 @@ function FooterInfo() {
             <button
               type="button"
               className="
-                mt-[6px]
+                mt-[8px]
                 border-0
                 bg-transparent
                 p-0
-                text-[10px]
+                text-[16px]
                 font-semibold
+                leading-[22px]
                 text-[var(--shade-02)]
                 underline
+                underline-offset-[3px]
               "
             >
               Learn more
             </button>
           </div>
 
-          {/* Safety */}
+          {/* SAFETY */}
 
           <div>
             <ShieldCheck
-              size={28}
+              size={27}
               strokeWidth={1.5}
               className="
-                mb-[18px]
+                mb-[20px]
                 text-[var(--shade-02)]
               "
             />
@@ -356,20 +272,21 @@ function FooterInfo() {
             <h3
               className="
                 m-0
-                text-[13px]
+                text-[18px]
                 font-semibold
+                leading-[24px]
                 text-[var(--shade-02)]
               "
             >
-              Safety & property
+              Safety &amp; property
             </h3>
 
             <div
               className="
-                mt-[10px]
-                space-y-[7px]
-                text-[10px]
-                leading-[17px]
+                mt-[16px]
+                space-y-[8px]
+                text-[16px]
+                leading-[25px]
                 text-[var(--shade-02)]
               "
             >
@@ -383,14 +300,16 @@ function FooterInfo() {
             <button
               type="button"
               className="
-                mt-[6px]
+                mt-[8px]
                 border-0
                 bg-transparent
                 p-0
-                text-[10px]
+                text-[16px]
                 font-semibold
+                leading-[22px]
                 text-[var(--shade-02)]
                 underline
+                underline-offset-[3px]
               "
             >
               Learn more
@@ -406,12 +325,12 @@ function FooterInfo() {
       <section
         className="
           mx-auto
-          w-[calc(100%-180px)]
+          w-[calc(100%-80px)]
           max-w-[1120px]
-          py-[32px]
+          py-[48px]
         "
       >
-        {/* Heading + carousel controls */}
+        {/* HEADING + CONTROLS */}
 
         <div
           className="
@@ -423,8 +342,10 @@ function FooterInfo() {
           <h2
             className="
               m-0
-              text-[16px]
+              text-[26px]
               font-semibold
+              leading-[32px]
+              tracking-[-0.02em]
               text-[var(--shade-02)]
             "
           >
@@ -435,22 +356,21 @@ function FooterInfo() {
             className="
               flex
               items-center
-              gap-[6px]
+              gap-[10px]
             "
           >
-            {/* Page indicator */}
-
             <span
               className="
-                mr-[6px]
-                text-[10px]
+                mr-[4px]
+                text-[16px]
+                leading-[20px]
                 text-[var(--neutral-07)]
               "
             >
               {nearbyPage + 1} / {totalPages}
             </span>
 
-            {/* Previous */}
+            {/* PREVIOUS */}
 
             <button
               type="button"
@@ -459,15 +379,15 @@ function FooterInfo() {
               aria-label="Previous stays"
               className={`
                 flex
-                h-[38px]
-                w-[38px]
+                h-[40px]
+                w-[40px]
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[var(--neutral-03)]
                 bg-[var(--shade-01)]
-                transition-all
+                transition-colors
                 duration-150
                 ${
                   nearbyPage === 0
@@ -477,12 +397,12 @@ function FooterInfo() {
               `}
             >
               <ChevronLeft
-                size={18}
-                strokeWidth={1.7}
+                size={20}
+                strokeWidth={1.5}
               />
             </button>
 
-            {/* Next */}
+            {/* NEXT */}
 
             <button
               type="button"
@@ -491,15 +411,15 @@ function FooterInfo() {
               aria-label="Next stays"
               className={`
                 flex
-                h-[38px]
-                w-[38px]
+                h-[40px]
+                w-[40px]
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[var(--neutral-03)]
                 bg-[var(--shade-01)]
-                transition-all
+                transition-colors
                 duration-150
                 ${
                   nearbyPage === totalPages - 1
@@ -509,20 +429,20 @@ function FooterInfo() {
               `}
             >
               <ChevronRight
-                size={18}
-                strokeWidth={1.7}
+                size={20}
+                strokeWidth={1.5}
               />
             </button>
           </div>
         </div>
 
         {/* =================================================
-            CARDS
+            NEARBY CARDS
         ================================================= */}
 
         <div
           className="
-            mt-[18px]
+            mt-[28px]
             grid
             grid-cols-5
             gap-[24px]
@@ -533,15 +453,13 @@ function FooterInfo() {
               key={stay.title}
               className="
                 min-w-0
-                transition-opacity
-                duration-200
               "
             >
-              {/* Image */}
+              {/* IMAGE */}
 
               <div
                 className="
-                  h-[248px]
+                  h-[210px]
                   w-full
                   overflow-hidden
                   rounded-[12px]
@@ -552,6 +470,7 @@ function FooterInfo() {
                   src={stay.image}
                   alt={stay.title}
                   className="
+                    block
                     h-full
                     w-full
                     object-cover
@@ -562,15 +481,15 @@ function FooterInfo() {
                 />
               </div>
 
-              {/* Details */}
+              {/* DETAILS */}
 
-              <div className="mt-[10px]">
+              <div className="mt-[12px]">
                 <h3
                   className="
                     m-0
-                    text-[13px]
+                    text-[16px]
                     font-semibold
-                    leading-[18px]
+                    leading-[21px]
                     text-[var(--shade-02)]
                   "
                 >
@@ -580,14 +499,14 @@ function FooterInfo() {
                 <p
                   className="
                     m-0
-                    mt-[5px]
-                    text-[12px]
-                    leading-[17px]
+                    mt-[7px]
+                    text-[15px]
+                    leading-[20px]
                     text-[var(--shade-02)]
                   "
                 >
-                  {stay.price}{" "}
-                  <span className="mx-[3px]">★</span>
+                  {stay.price}
+                  <span className="mx-[5px]">★</span>
                   {stay.rating}
                 </p>
               </div>
