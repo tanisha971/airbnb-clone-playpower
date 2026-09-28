@@ -1,11 +1,30 @@
-const Listing = require("../models/Listing");
+import Listing from "../models/Listing.js";
 
-const getListingById = async (listingId) => {
-  return Listing.findById(listingId)
-    .populate("amenities")
-    .lean();
+export const getListingById = async (
+  listingId
+) => {
+  const listing = await Listing.findOne({
+    listingId,
+  }).lean();
+
+  return listing;
 };
 
-module.exports = {
-  getListingById,
+export const createOrUpdateListing = async (
+  listingData
+) => {
+  const listing =
+    await Listing.findOneAndUpdate(
+      {
+        listingId: listingData.listingId,
+      },
+      listingData,
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+      }
+    ).lean();
+
+  return listing;
 };

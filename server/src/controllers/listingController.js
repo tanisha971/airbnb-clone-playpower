@@ -1,10 +1,16 @@
-const listingService = require("../services/listingService");
+import {
+  getListingById,
+} from "../services/listingService.js";
 
-const getListing = async (req, res, next) => {
+export const getListing = async (
+  req,
+  res
+) => {
   try {
-    const listing = await listingService.getListingById(
-      req.params.id
-    );
+    const { listingId } = req.params;
+
+    const listing =
+      await getListingById(listingId);
 
     if (!listing) {
       return res.status(404).json({
@@ -13,15 +19,19 @@ const getListing = async (req, res, next) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: listing,
     });
   } catch (error) {
-    next(error);
-  }
-};
+    console.error(
+      "Get listing error:",
+      error
+    );
 
-module.exports = {
-  getListing,
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch listing",
+    });
+  }
 };

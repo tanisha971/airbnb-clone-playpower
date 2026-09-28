@@ -1,21 +1,16 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const amenitySchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
-      trim: true,
-    },
-
-    icon: {
-      type: String,
-      default: "",
+      unique: true,
     },
 
     category: {
       type: String,
-      default: "General",
+      required: true,
     },
   },
   {
@@ -23,4 +18,9 @@ const amenitySchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Amenity", amenitySchema);
+const Amenity = mongoose.model(
+  "Amenity",
+  amenitySchema
+);
+
+export default Amenity;
