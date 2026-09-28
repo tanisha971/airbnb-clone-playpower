@@ -1,14 +1,16 @@
 import { useCallback, useState } from "react";
 
 import Navbar from "../components/Navbar/Navbar";
-import Listing, {
-  galleryPhotos,
-} from "../components/Listing/Listing";
+
+import Listing from "../components/Listing/Listing";
+import { galleryPhotos } from "../components/Listing/PhotoGrid";
+
 import Reviews from "../components/Reviews/Reviews";
 import Location from "../components/Location/Location";
 import HostSection from "../components/Host/HostSection";
 import FooterInfo from "../components/Footer/FooterInfo";
-import PhotoTour from "../components/PhotoTour/PhotoTour";
+
+import PhotoTourScrollable from "../components/PhotoTour/PhotoTourScrollable";
 import Lightbox from "../components/Lightbox/Lightbox";
 
 function ListingPage() {
@@ -62,16 +64,30 @@ function ListingPage() {
   }, []);
 
   return (
-    <div className="site-shell min-h-screen bg-[var(--shade-01)]">
+    <div
+      className="
+        site-shell
+        min-h-screen
+        bg-[var(--shade-01)]
+      "
+    >
+      {/* =====================================================
+          NAVBAR
+      ===================================================== */}
+
       <Navbar />
 
-      {/* Main listing */}
+      {/* =====================================================
+          MAIN LISTING
+      ===================================================== */}
 
       <Listing
         onShowAllPhotos={openPhotoTour}
       />
 
-      {/* Major page sections */}
+      {/* =====================================================
+          MAJOR PAGE SECTIONS
+      ===================================================== */}
 
       <Reviews />
 
@@ -81,17 +97,21 @@ function ListingPage() {
 
       <FooterInfo />
 
-      {/* Photo Tour */}
+      {/* =====================================================
+          PHOTO TOUR
+      ===================================================== */}
 
       {isPhotoTourOpen && (
-        <PhotoTour
+        <PhotoTourScrollable
           photos={galleryPhotos}
           onClose={closePhotoTour}
           onOpenLightbox={openLightbox}
         />
       )}
 
-      {/* Lightbox */}
+      {/* =====================================================
+          LIGHTBOX
+      ===================================================== */}
 
       {isLightboxOpen && (
         <Lightbox

@@ -132,88 +132,48 @@ function Reviews() {
       "
     >
       {/* Main rating */}
-
       <div className="text-center">
-        <div
-          className="
-            flex
-            items-center
-            justify-center
-            gap-[14px]
-          "
-        >
-          <span
+        <div className="flex justify-center">
+          <img
+            src="/assets/logo/Guest-Favorite-5.0.png"
+            alt="4.95 Guest favourite"
             className="
-              text-[48px]
-              leading-none
-              text-[var(--shade-02)]
+              block
+              h-[150px]
+              w-[470px]
+              object-contain
             "
-          >
-            ❧
-          </span>
-
-          <span
-            className="
-              text-[64px]
-              font-semibold
-              leading-none
-              tracking-[-0.04em]
-              text-[var(--shade-02)]
-            "
-          >
-            4.95
-          </span>
-
-          <span
-            className="
-              -scale-x-100
-              text-[48px]
-              leading-none
-              text-[var(--shade-02)]
-            "
-          >
-            ❧
-          </span>
+          />
         </div>
 
-        <h2
-          className="
-            mt-[22px]
-            mb-0
-            text-[17px]
-            font-semibold
-            text-[var(--shade-02)]
-          "
-        >
-          Guest favourite
-        </h2>
+        
 
         <p
           className="
             mx-auto
-            mt-[6px]
-            max-w-[340px]
-            text-[12px]
-            leading-[17px]
+            mt-[10px]
+            max-w-[430px]
+            text-[16px]
+            leading-[22px]
             text-[var(--shade-02)]
           "
         >
           This home is a guest favourite based on ratings,
-          reviews and reliability.
+          reviews and reliability
         </p>
 
         <button
           type="button"
           className="
-            mt-[5px]
+            mt-[14px]
             border-0
             bg-transparent
             p-0
-            text-[12px]
+            text-[16px]
             font-medium
             text-[var(--shade-02)]
             underline
-            underline-offset-[2px]
+            underline-offset-[3px]
           "
         >
           How reviews work

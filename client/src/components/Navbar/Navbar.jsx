@@ -3,16 +3,84 @@ import { Globe, Menu, Search } from "lucide-react";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("photos");
 
   useEffect(() => {
+    const sections = ["photos", "amenities", "reviews", "location"];
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 500);
+      const scrollY = window.scrollY;
+
+      // Sticky navbar state
+      setIsScrolled(scrollY > 500);
+
+      // Detect currently visible section
+      let currentSection = "photos";
+
+      sections.forEach((sectionId) => {
+        const section = document.getElementById(sectionId);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        // Navbar height + small visual offset
+        if (rect.top <= 140) {
+          currentSection = sectionId;
+        }
+      });
+
+      setActiveSection(currentSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Set initial state
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  const handleSectionClick = (sectionId) => {
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    const navbarOffset = 80;
+
+    const sectionTop =
+      section.getBoundingClientRect().top +
+      window.scrollY -
+      navbarOffset;
+
+    window.scrollTo({
+      top: sectionTop,
+      behavior: "smooth",
+    });
+
+    setActiveSection(sectionId);
+  };
+
+  const navItems = [
+    {
+      id: "photos",
+      label: "Photos",
+    },
+    {
+      id: "amenities",
+      label: "Amenities",
+    },
+    {
+      id: "reviews",
+      label: "Reviews",
+    },
+    {
+      id: "location",
+      label: "Location",
+    },
+  ];
 
   return (
     <header
@@ -348,77 +416,53 @@ function Navbar() {
               gap-[28px]
             "
           >
-            <a
-              href="#photos"
-              className="
-                relative
-                flex
-                h-full
-                items-center
-                text-[14px]
-                font-semibold
-                text-[var(--shade-02)]
-                no-underline
-              "
-            >
-              Photos
+            {navItems.map((item) => {
+              const isActive =
+                activeSection === item.id;
 
-              <span
-                className="
-                  absolute
-                  bottom-0
-                  left-0
-                  right-0
-                  h-[2px]
-                  bg-[var(--shade-02)]
-                "
-              />
-            </a>
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() =>
+                    handleSectionClick(item.id)
+                  }
+                  className={`
+                    relative
+                    flex
+                    h-full
+                    items-center
+                    border-0
+                    bg-transparent
+                    p-0
+                    text-[14px]
+                    no-underline
+                    transition-colors
+                    duration-150
+                    ${
+                      isActive
+                        ? "font-semibold text-[var(--shade-02)]"
+                        : "font-medium text-[var(--neutral-07)]"
+                    }
+                  `}
+                >
+                  {item.label}
 
-            <a
-              href="#amenities"
-              className="
-                flex
-                h-full
-                items-center
-                text-[14px]
-                font-medium
-                text-[var(--neutral-07)]
-                no-underline
-              "
-            >
-              Amenities
-            </a>
-
-            <a
-              href="#reviews"
-              className="
-                flex
-                h-full
-                items-center
-                text-[14px]
-                font-medium
-                text-[var(--neutral-07)]
-                no-underline
-              "
-            >
-              Reviews
-            </a>
-
-            <a
-              href="#location"
-              className="
-                flex
-                h-full
-                items-center
-                text-[14px]
-                font-medium
-                text-[var(--neutral-07)]
-                no-underline
-              "
-            >
-              Location
-            </a>
+                  {isActive && (
+                    <span
+                      className="
+                        absolute
+                        bottom-0
+                        left-0
+                        right-0
+                        h-[2px]
+                        bg-[var(--shade-02)]
+                      "
+                    />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
           {/* RIGHT */}

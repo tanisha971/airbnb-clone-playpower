@@ -1,4 +1,6 @@
+import { useState } from "react";
 import {
+  CalendarDays,
   ChevronLeft,
   ChevronRight,
   PawPrint,
@@ -7,47 +9,97 @@ import {
 } from "lucide-react";
 
 function FooterInfo() {
-  const nearbyStays = [
-    {
-      image: "/assets/gallery/pool.avif",
-      title: "Beautiful Stay With a private pool",
-      location: "Candolim, Goa",
-      price: "₹23,500",
-      rating: "4.91",
-    },
-    {
-      image: "/assets/gallery/39.avif",
-      title: "Modern villa with private pool",
-      location: "Calangute, Goa",
-      price: "₹21,250",
-      rating: "4.85",
-    },
-    {
-      image: "/assets/gallery/46.avif",
-      title: "Goan luxury stay with pool",
-      location: "Anjuna, Goa",
-      price: "₹18,900",
-      rating: "4.88",
-    },
-    {
-      image: "/assets/gallery/pool2.avif",
-      title: "Tropical Studio 5 mins from beach",
-      location: "Candolim, Goa",
-      price: "₹15,200",
-      rating: "4.82",
-    },
-    {
-      image: "/assets/gallery/50.avif",
-      title: "Luxury Castle 1BHK with plunge pool",
-      location: "Calangute, Goa",
-      price: "₹24,500",
-      rating: "4.95",
-    },
+  const [nearbyPage, setNearbyPage] = useState(0);
+
+  const nearbyStayPages = [
+    [
+      {
+        image: "/assets/gallery/pool.avif",
+        title: "Beautiful Studio with a view to die for",
+        price: "₹23,600",
+        rating: "4.91",
+      },
+      {
+        image: "/assets/gallery/39.avif",
+        title: "NAQAB - 1bhk with private pool",
+        price: "₹42,218",
+        rating: "4.95",
+      },
+      {
+        image: "/assets/gallery/46.avif",
+        title: "Greentique Luxury Flat with plunge pool, Calangute",
+        price: "₹44,506",
+        rating: "4.94",
+      },
+      {
+        image: "/assets/gallery/pool2.avif",
+        title: "The Tropical Studio | 5 mins to Beach",
+        price: "₹22,824",
+        rating: "4.96",
+      },
+      {
+        image: "/assets/gallery/50.avif",
+        title: "Luxury Casa Bella 1BHK with plunge pool, Calangute",
+        price: "₹39,942",
+        rating: "4.95",
+      },
+    ],
+
+    [
+      {
+        image: "/assets/gallery/pool2.avif",
+        title: "The Tropical Studio | 5 mins to Beach",
+        price: "₹22,824",
+        rating: "4.96",
+      },
+      {
+        image: "/assets/gallery/50.avif",
+        title: "Luxury Casa Bella 1BHK with plunge pool, Calangute",
+        price: "₹39,942",
+        rating: "4.95",
+      },
+      {
+        image: "/assets/gallery/jacuzzi.avif",
+        title: "Kanso by Earthen Window | Jacuzzi | Terrace | Pool",
+        price: "₹45,648",
+        rating: "5.0",
+      },
+      {
+        image: "/assets/gallery/39.avif",
+        title: "Luxury Apt | Private Pool | 6 Mins from Beach",
+        price: "₹48,786",
+        rating: "4.93",
+      },
+      {
+        image: "/assets/gallery/ext1.jpg",
+        title: "Serendipity Cottage - Calm Stay in Calangute-Baga.",
+        price: "₹22,824",
+        rating: "4.92",
+      },
+    ],
   ];
+
+  const currentStays = nearbyStayPages[nearbyPage];
+
+  const totalPages = nearbyStayPages.length;
+
+  const goToPreviousPage = () => {
+    setNearbyPage((currentPage) =>
+      Math.max(currentPage - 1, 0)
+    );
+  };
+
+  const goToNextPage = () => {
+    setNearbyPage((currentPage) =>
+      Math.min(currentPage + 1, totalPages - 1)
+    );
+  };
 
   return (
     <footer>
-      {/* Bottom listing navigation */}
+      {/* =====================================================
+          BOTTOM LISTING NAVIGATION
+      ===================================================== */}
 
       <div
         className="
@@ -166,7 +218,9 @@ function FooterInfo() {
         </div>
       </div>
 
-      {/* Policies */}
+      {/* =====================================================
+          POLICIES
+      ===================================================== */}
 
       <section
         className="
@@ -188,6 +242,12 @@ function FooterInfo() {
           {/* Cancellation */}
 
           <div>
+            <CalendarDays
+              size={28}
+              strokeWidth={1.5}
+              className="mb-[18px] text-[var(--shade-02)]"
+            />
+
             <h3
               className="
                 m-0
@@ -209,8 +269,8 @@ function FooterInfo() {
               "
             >
               Free cancellation before 17 October.
-              Cancel before check-in for a partial
-              refund.
+              Cancel before check-in on 18 October
+              for a partial refund.
             </p>
 
             <button
@@ -233,6 +293,12 @@ function FooterInfo() {
           {/* House rules */}
 
           <div>
+            <Sparkles
+              size={28}
+              strokeWidth={1.5}
+              className="mb-[18px] text-[var(--shade-02)]"
+            />
+
             <h3
               className="
                 m-0
@@ -244,56 +310,18 @@ function FooterInfo() {
               House rules
             </h3>
 
-            <div className="mt-[10px] space-y-[7px]">
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-[8px]
-                  text-[10px]
-                  text-[var(--shade-02)]
-                "
-              >
-                <Sparkles
-                  size={13}
-                  strokeWidth={1.5}
-                />
-
-                <span>
-                  Check-in after 2:00 pm
-                </span>
-              </div>
-
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-[8px]
-                  text-[10px]
-                  text-[var(--shade-02)]
-                "
-              >
-                <PawPrint
-                  size={13}
-                  strokeWidth={1.5}
-                />
-
-                <span>Pets allowed</span>
-              </div>
-
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-[8px]
-                  text-[10px]
-                  text-[var(--shade-02)]
-                "
-              >
-                <span>
-                  Check-out before 11:00 am
-                </span>
-              </div>
+            <div
+              className="
+                mt-[10px]
+                space-y-[7px]
+                text-[10px]
+                leading-[17px]
+                text-[var(--shade-02)]
+              "
+            >
+              <div>Check-in after 2:00 pm</div>
+              <div>Checkout before 11:00 am</div>
+              <div>3 guests maximum</div>
             </div>
 
             <button
@@ -316,6 +344,15 @@ function FooterInfo() {
           {/* Safety */}
 
           <div>
+            <ShieldCheck
+              size={28}
+              strokeWidth={1.5}
+              className="
+                mb-[18px]
+                text-[var(--shade-02)]
+              "
+            />
+
             <h3
               className="
                 m-0
@@ -330,33 +367,17 @@ function FooterInfo() {
             <div
               className="
                 mt-[10px]
-                flex
-                items-start
-                gap-[8px]
+                space-y-[7px]
+                text-[10px]
+                leading-[17px]
+                text-[var(--shade-02)]
               "
             >
-              <ShieldCheck
-                size={14}
-                strokeWidth={1.5}
-                className="
-                  mt-[1px]
-                  shrink-0
-                  text-[var(--shade-02)]
-                "
-              />
-
-              <p
-                className="
-                  m-0
-                  text-[10px]
-                  leading-[17px]
-                  text-[var(--shade-02)]
-                "
-              >
-                Carbon monoxide alarm reported.
-                Smoke detector installed on the
-                property.
-              </p>
+              <div>Carbon monoxide alarm not reported</div>
+              <div>Smoke alarm not reported</div>
+              <div>
+                Exterior security cameras on property
+              </div>
             </div>
 
             <button
@@ -378,7 +399,9 @@ function FooterInfo() {
         </div>
       </section>
 
-      {/* More stays nearby */}
+      {/* =====================================================
+          MORE STAYS NEARBY
+      ===================================================== */}
 
       <section
         className="
@@ -388,6 +411,8 @@ function FooterInfo() {
           py-[32px]
         "
       >
+        {/* Heading + carousel controls */}
+
         <div
           className="
             flex
@@ -410,9 +435,11 @@ function FooterInfo() {
             className="
               flex
               items-center
-              gap-[4px]
+              gap-[6px]
             "
           >
+            {/* Page indicator */}
+
             <span
               className="
                 mr-[6px]
@@ -420,76 +447,104 @@ function FooterInfo() {
                 text-[var(--neutral-07)]
               "
             >
-              1 / 2
+              {nearbyPage + 1} / {totalPages}
             </span>
+
+            {/* Previous */}
 
             <button
               type="button"
+              onClick={goToPreviousPage}
+              disabled={nearbyPage === 0}
               aria-label="Previous stays"
-              className="
+              className={`
                 flex
-                h-[28px]
-                w-[28px]
+                h-[38px]
+                w-[38px]
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[var(--neutral-03)]
                 bg-[var(--shade-01)]
-                text-[var(--shade-02)]
-              "
+                transition-all
+                duration-150
+                ${
+                  nearbyPage === 0
+                    ? "cursor-not-allowed text-[var(--neutral-04)]"
+                    : "text-[var(--shade-02)] hover:bg-[var(--neutral-01)]"
+                }
+              `}
             >
               <ChevronLeft
-                size={14}
-                strokeWidth={1.8}
+                size={18}
+                strokeWidth={1.7}
               />
             </button>
 
+            {/* Next */}
+
             <button
               type="button"
+              onClick={goToNextPage}
+              disabled={nearbyPage === totalPages - 1}
               aria-label="Next stays"
-              className="
+              className={`
                 flex
-                h-[28px]
-                w-[28px]
+                h-[38px]
+                w-[38px]
                 items-center
                 justify-center
                 rounded-full
                 border
                 border-[var(--neutral-03)]
                 bg-[var(--shade-01)]
-                text-[var(--shade-02)]
-              "
+                transition-all
+                duration-150
+                ${
+                  nearbyPage === totalPages - 1
+                    ? "cursor-not-allowed text-[var(--neutral-04)]"
+                    : "text-[var(--shade-02)] hover:bg-[var(--neutral-01)]"
+                }
+              `}
             >
               <ChevronRight
-                size={14}
-                strokeWidth={1.8}
+                size={18}
+                strokeWidth={1.7}
               />
             </button>
           </div>
         </div>
 
-        {/* Nearby cards */}
+        {/* =================================================
+            CARDS
+        ================================================= */}
 
         <div
           className="
             mt-[18px]
             grid
             grid-cols-5
-            gap-[12px]
+            gap-[24px]
           "
         >
-          {nearbyStays.map((stay) => (
+          {currentStays.map((stay) => (
             <article
               key={stay.title}
-              className="min-w-0"
+              className="
+                min-w-0
+                transition-opacity
+                duration-200
+              "
             >
+              {/* Image */}
+
               <div
                 className="
-                  h-[145px]
+                  h-[248px]
                   w-full
                   overflow-hidden
-                  rounded-[8px]
+                  rounded-[12px]
                   bg-[var(--neutral-01)]
                 "
               >
@@ -500,19 +555,22 @@ function FooterInfo() {
                     h-full
                     w-full
                     object-cover
+                    transition-transform
+                    duration-300
+                    hover:scale-[1.02]
                   "
                 />
               </div>
 
-              <div className="mt-[8px]">
+              {/* Details */}
+
+              <div className="mt-[10px]">
                 <h3
                   className="
                     m-0
-                    overflow-hidden
-                    text-ellipsis
-                    whitespace-nowrap
-                    text-[11px]
+                    text-[13px]
                     font-semibold
+                    leading-[18px]
                     text-[var(--shade-02)]
                   "
                 >
@@ -522,26 +580,15 @@ function FooterInfo() {
                 <p
                   className="
                     m-0
-                    mt-[3px]
-                    text-[10px]
-                    text-[var(--neutral-07)]
-                  "
-                >
-                  {stay.location}
-                </p>
-
-                <p
-                  className="
-                    m-0
-                    mt-[3px]
-                    text-[10px]
+                    mt-[5px]
+                    text-[12px]
+                    leading-[17px]
                     text-[var(--shade-02)]
                   "
                 >
-                  <span className="font-semibold">
-                    {stay.price}
-                  </span>{" "}
-                  night · ★ {stay.rating}
+                  {stay.price}{" "}
+                  <span className="mx-[3px]">★</span>
+                  {stay.rating}
                 </p>
               </div>
             </article>
