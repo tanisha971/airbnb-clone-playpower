@@ -1,79 +1,26 @@
-import { CalendarDays, ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
+import {
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
+} from "lucide-react";
 import { useState } from "react";
 
-function FooterInfo() {
+function FooterInfo({ listing }) {
   const [nearbyPage, setNearbyPage] = useState(0);
 
-  const nearbyStayPages = [
-    [
-      {
-        image: "/assets/gallery/studio1.webp",
-        title: "Beautiful Studio with a view to die for",
-        price: "₹23,600",
-        rating: "4.91",
-      },
-      {
-        image: "/assets/gallery/pool3.jpg",
-        title: "NAQAB - 1bhk with private pool",
-        price: "₹42,218",
-        rating: "4.95",
-      },
-      {
-        image: "/assets/gallery/pool2.avif",
-        title: "Greentique Luxury Flat with plunge pool, Calangute",
-        price: "₹44,506",
-        rating: "4.94",
-      },
-      {
-        image: "/assets/gallery/beach.webp",
-        title: "The Tropical Studio | 5 mins to Beach",
-        price: "₹22,824",
-        rating: "4.96",
-      },
-      {
-        image: "/assets/gallery/50.avif",
-        title: "Luxury Casa Bella 1BHK with plunge pool, Calangute",
-        price: "₹39,942",
-        rating: "4.95",
-      },
-    ],
+  const nearbyStays = listing?.nearbyStays || [];
 
-    [
-      {
-        image: "/assets/gallery/pool2.avif",
-        title: "The Tropical Studio | 5 mins to Beach",
-        price: "₹22,824",
-        rating: "4.96",
-      },
-      {
-        image: "/assets/gallery/50.avif",
-        title: "Luxury Casa Bella 1BHK with plunge pool, Calangute",
-        price: "₹39,942",
-        rating: "4.95",
-      },
-      {
-        image: "/assets/gallery/jacuzzi.avif",
-        title: "Kanso by Earthen Window | Jacuzzi | Terrace | Pool",
-        price: "₹45,648",
-        rating: "5.0",
-      },
-      {
-        image: "/assets/gallery/26_BR9.avif",
-        title: "Luxury Apt | Private Pool | 6 Mins from Beach",
-        price: "₹48,786",
-        rating: "4.93",
-      },
-      {
-        image: "/assets/gallery/ext1.jpg",
-        title: "Serendipity Cottage - Calm Stay in Calangute-Baga.",
-        price: "₹22,824",
-        rating: "4.92",
-      },
-    ],
-  ];
+  const itemsPerPage = 5;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(nearbyStays.length / itemsPerPage)
+  );
 
-  const currentStays = nearbyStayPages[nearbyPage];
-  const totalPages = nearbyStayPages.length;
+  const currentStays = nearbyStays.slice(
+    nearbyPage * itemsPerPage,
+    nearbyPage * itemsPerPage + itemsPerPage
+  );
 
   const goToPreviousPage = () => {
     setNearbyPage((currentPage) =>
@@ -86,6 +33,15 @@ function FooterInfo() {
       Math.min(currentPage + 1, totalPages - 1)
     );
   };
+
+  const cancellationPolicy =
+    listing?.cancellationPolicy ||
+    "Free cancellation before check-in.";
+
+  const houseRules = listing?.houseRules || [];
+
+  const safetyAndProperty =
+    listing?.safetyAndProperty || [];
 
   return (
     <footer className="w-full bg-[var(--shade-01)]">
@@ -157,9 +113,7 @@ function FooterInfo() {
                 text-[var(--shade-02)]
               "
             >
-              Free cancellation before 17 October.
-              Cancel before check-in on 18 October
-              for a partial refund.
+              {cancellationPolicy}
             </p>
 
             <p
@@ -233,9 +187,9 @@ function FooterInfo() {
                 text-[var(--shade-02)]
               "
             >
-              <div>Check-in after 2:00 pm</div>
-              <div>Checkout before 11:00 am</div>
-              <div>3 guests maximum</div>
+              {houseRules.map((rule) => (
+                <div key={rule}>{rule}</div>
+              ))}
             </div>
 
             <button
@@ -290,11 +244,9 @@ function FooterInfo() {
                 text-[var(--shade-02)]
               "
             >
-              <div>Carbon monoxide alarm not reported</div>
-              <div>Smoke alarm not reported</div>
-              <div>
-                Exterior security cameras on property
-              </div>
+              {safetyAndProperty.map((item) => (
+                <div key={item}>{item}</div>
+              ))}
             </div>
 
             <button
@@ -367,7 +319,9 @@ function FooterInfo() {
                 text-[var(--neutral-07)]
               "
             >
-              {nearbyPage + 1} / {totalPages}
+              {nearbyStays.length > 0
+                ? `${nearbyPage + 1} / ${totalPages}`
+                : "0 / 0"}
             </span>
 
             {/* PREVIOUS */}
@@ -407,7 +361,10 @@ function FooterInfo() {
             <button
               type="button"
               onClick={goToNextPage}
-              disabled={nearbyPage === totalPages - 1}
+              disabled={
+                nearbyPage === totalPages - 1 ||
+                nearbyStays.length === 0
+              }
               aria-label="Next stays"
               className={`
                 flex
@@ -422,7 +379,8 @@ function FooterInfo() {
                 transition-colors
                 duration-150
                 ${
-                  nearbyPage === totalPages - 1
+                  nearbyPage === totalPages - 1 ||
+                  nearbyStays.length === 0
                     ? "cursor-not-allowed text-[var(--neutral-04)]"
                     : "text-[var(--shade-02)] hover:bg-[var(--neutral-01)]"
                 }
@@ -436,9 +394,7 @@ function FooterInfo() {
           </div>
         </div>
 
-        {/* =================================================
-            NEARBY CARDS
-        ================================================= */}
+        {/* NEARBY CARDS */}
 
         <div
           className="
@@ -451,9 +407,7 @@ function FooterInfo() {
           {currentStays.map((stay) => (
             <article
               key={stay.title}
-              className="
-                min-w-0
-              "
+              className="min-w-0"
             >
               {/* IMAGE */}
 

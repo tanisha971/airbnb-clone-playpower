@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-function BookingCard({ reserved, onReserve }) {
+function BookingCard({ listing, reserved, onReserve }) {
   const [showToast, setShowToast] = useState(false);
 
   const handleReserve = () => {
@@ -53,10 +53,10 @@ function BookingCard({ reserved, onReserve }) {
               underline-offset-[3px]
             "
           >
-            ₹28,499
+            {listing.price}
           </strong>
 
-          <span>for 5 nights</span>
+          <span>for {listing.nights} nights</span>
         </div>
 
         {/* DATE + GUESTS */}
@@ -185,7 +185,7 @@ function BookingCard({ reserved, onReserve }) {
                   text-[var(--shade-02)]
                 "
               >
-                2 guests
+                {listing.guests} guests
               </span>
             </span>
 
@@ -214,10 +214,16 @@ function BookingCard({ reserved, onReserve }) {
             text-[var(--neutral-07)]
           "
         >
-          Free cancellation before{" "}
-          <strong className="ml-[4px] font-semibold text-[var(--shade-02)]">
-            17 October
-          </strong>
+          {listing.cancellationPolicy ? (
+            <>
+              {listing.cancellationPolicy.split(" before ")[0]} before{" "}
+              <strong className="ml-[4px] font-semibold text-[var(--shade-02)]">
+                {listing.cancellationPolicy.split(" before ")[1]?.split(".")[0]}
+              </strong>
+            </>
+          ) : (
+            "Free cancellation"
+          )}
         </div>
 
         {/* RESERVE */}
@@ -228,13 +234,13 @@ function BookingCard({ reserved, onReserve }) {
           className="
             mt-[18px]
             flex
-            h-[56px]
+            h-[50px]
             w-full
             items-center
             justify-center
             rounded-full
             border-0
-            bg-[var(--primary-02)]
+            bg-[linear-gradient(90deg,#e61e4d_0%,#d70466_100%)]
             px-[20px]
             text-[16px]
             font-semibold
@@ -248,7 +254,19 @@ function BookingCard({ reserved, onReserve }) {
         >
           Reserve
         </button>
-        <p className=" mb-0 mt-[16px] text-center text-[14px] leading-[20px] text-[var(--neutral-07)] " > You won&apos;t be charged yet </p>
+
+        <p
+          className="
+            mb-0
+            mt-[16px]
+            text-center
+            text-[14px]
+            leading-[20px]
+            text-[var(--neutral-07)]
+          "
+        >
+          You won&apos;t be charged yet
+        </p>
       </div>
 
       {/* RESERVE TOAST */}

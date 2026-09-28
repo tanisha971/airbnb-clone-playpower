@@ -9,129 +9,210 @@ import {
   Home,
   PawPrint,
   ShieldCheck,
+  ShieldOff,
   Sparkles,
   Waves,
 } from "lucide-react";
 
-function Amenities() {
+function Amenities({ listing }) {
   const [showAllAmenities, setShowAllAmenities] = useState(false);
 
-  const amenities = [
-    [CookingPot, "Kitchen"],
-    [BriefcaseBusiness, "Dedicated workspace"],
-    [Waves, "Pool"],
-    [Car, "Free parking on premises"],
-    [PawPrint, "Pets allowed"],
-    [ShieldCheck, "TV"],
-    [Home, "Carbon monoxide alarm", true],
-    [Sparkles, "Exterior security cameras on property"],
-    [Flame, "Smoke alarm", true],
-  ];
+  const availableAmenities = listing?.amenities || [];
+
+  /*
+   * These amenities are present in the listing data,
+   * but are reported as unavailable / not reported.
+   */
+  const unavailableAmenities = new Set([
+    "Carbon monoxide alarm",
+    "Smoke alarm",
+  ]);
+
+  /*
+   * Icon mapping for amenities coming from MongoDB.
+   */
+  const amenityIcons = {
+    Kitchen: CookingPot,
+    "Dedicated workspace": BriefcaseBusiness,
+    Pool: Waves,
+    "Free parking on premises": Car,
+    "Pets allowed": PawPrint,
+    TV: Home,
+
+    "Carbon monoxide alarm": ShieldOff,
+    "Exterior security cameras on property": ShieldCheck,
+    "Smoke alarm": ShieldOff,
+
+    Hairdryer: Accessibility,
+    "Cleaning products": Sparkles,
+    Shampoo: Sparkles,
+    "Hot water": Waves,
+    "Shower gel": Sparkles,
+    "Washing machine": Home,
+    Hangers: Home,
+    "Bed linen": Home,
+    "Room-darkening blinds": Home,
+    Iron: Home,
+    "Clothes storage": Home,
+    Cot: Home,
+    "Air conditioning": Waves,
+    "Ceiling fan": Sparkles,
+    Wifi: Waves,
+    Fridge: Home,
+    Freezer: Home,
+    Microwave: Home,
+    "Cooking basics": CookingPot,
+    "Crockery and cutlery": CookingPot,
+    Kettle: Home,
+    Coffee: Home,
+    "Wine glasses": Home,
+    Toaster: Home,
+    Blender: CookingPot,
+    Cooker: CookingPot,
+    "Private entrance": DoorOpen,
+    "Patio or balcony": Home,
+    "Outdoor dining area": Waves,
+    "Hot tub": Waves,
+    Gym: Accessibility,
+    "Cleaning available during stay": Sparkles,
+    "Long-term stays allowed": Home,
+    "Self check-in": DoorOpen,
+  };
+
+  const getIcon = (amenity) => {
+    return amenityIcons[amenity] || Home;
+  };
+
+  /*
+   * First 10 amenities shown in the main section.
+   */
+  const amenities = availableAmenities.slice(0, 10);
 
   const amenityCategories = [
     {
       title: "Bathroom",
       items: [
-        [Accessibility, "Hairdryer"],
-        [Home, "Cleaning products"],
-        [Sparkles, "Shampoo"],
-        [Waves, "Hot water"],
-        [Flame, "Shower gel"],
+        "Hairdryer",
+        "Cleaning products",
+        "Shampoo",
+        "Hot water",
+        "Shower gel",
       ],
     },
     {
       title: "Bedroom and laundry",
       items: [
-        [Home, "Washing machine"],
-        [Home, "Hangers"],
-        [Home, "Bed linen"],
-        [Home, "Room-darkening blinds"],
-        [Home, "Iron"],
-        [Home, "Clothes storage"],
-        [Home, "Cot"],
+        "Washing machine",
+        "Hangers",
+        "Bed linen",
+        "Room-darkening blinds",
+        "Iron",
+        "Clothes storage",
+        "Cot",
       ],
     },
     {
       title: "Entertainment",
-      items: [[Home, "TV"]],
+      items: ["TV"],
     },
     {
       title: "Family",
-      items: [[Home, "Cot"]],
+      items: ["Cot"],
     },
     {
       title: "Heating and cooling",
       items: [
-        [Waves, "Air conditioning"],
-        [Sparkles, "Ceiling fan"],
+        "Air conditioning",
+        "Ceiling fan",
       ],
     },
     {
       title: "Home safety",
       items: [
-        [ShieldCheck, "Exterior security cameras on property"],
-        [Home, "Carbon monoxide alarm", true],
-        [Flame, "Smoke alarm", true],
+        "Exterior security cameras on property",
+        "Carbon monoxide alarm",
+        "Smoke alarm",
       ],
     },
     {
       title: "Internet and office",
       items: [
-        [Waves, "Wifi"],
-        [BriefcaseBusiness, "Dedicated workspace"],
+        "Wifi",
+        "Dedicated workspace",
       ],
     },
     {
       title: "Kitchen and dining",
       items: [
-        [CookingPot, "Kitchen"],
-        [Home, "Fridge"],
-        [Home, "Freezer"],
-        [Home, "Microwave"],
-        [CookingPot, "Cooking basics"],
-        [CookingPot, "Crockery and cutlery"],
-        [Home, "Kettle"],
-        [Home, "Coffee"],
-        [Home, "Wine glasses"],
-        [Home, "Toaster"],
-        [CookingPot, "Blender"],
-        [CookingPot, "Cooker"],
+        "Kitchen",
+        "Fridge",
+        "Freezer",
+        "Microwave",
+        "Cooking basics",
+        "Crockery and cutlery",
+        "Kettle",
+        "Coffee",
+        "Wine glasses",
+        "Toaster",
+        "Blender",
+        "Cooker",
       ],
     },
     {
       title: "Location features",
-      items: [[Home, "Private entrance"]],
+      items: ["Private entrance"],
     },
     {
       title: "Outdoor",
       items: [
-        [Home, "Patio or balcony"],
-        [Waves, "Outdoor dining area"],
+        "Patio or balcony",
+        "Outdoor dining area",
       ],
     },
     {
       title: "Parking and facilities",
       items: [
-        [Car, "Free parking on premises"],
-        [Waves, "Pool"],
-        [Waves, "Hot tub"],
-        [Accessibility, "Gym"],
+        "Free parking on premises",
+        "Pool",
+        "Hot tub",
+        "Gym",
       ],
     },
     {
       title: "Services",
       items: [
-        [PawPrint, "Pets allowed"],
-        [Sparkles, "Cleaning available during stay"],
-        [Home, "Long-term stays allowed"],
-        [DoorOpen, "Self check-in"],
+        "Pets allowed",
+        "Cleaning available during stay",
+        "Long-term stays allowed",
+        "Self check-in",
       ],
     },
   ];
 
+  const getAmenityClasses = (label) => {
+    const unavailable = unavailableAmenities.has(label);
+
+    return {
+      container: unavailable
+        ? "text-[var(--neutral-07)]"
+        : "text-[var(--shade-02)]",
+
+      text: unavailable
+        ? "text-[var(--neutral-07)] line-through decoration-[var(--neutral-07)]"
+        : "text-[var(--shade-02)]",
+
+      icon: unavailable
+        ? "shrink-0 text-[var(--neutral-06)]"
+        : "shrink-0 text-[var(--shade-02)]",
+    };
+  };
+
   return (
     <>
-      {/* Main amenities section */}
+      {/* =====================================================
+          MAIN AMENITIES
+      ===================================================== */}
+
       <section
         id="amenities"
         className="
@@ -164,32 +245,35 @@ function Amenities() {
             gap-y-[16px]
           "
         >
-          {amenities.map(([Icon, label, unavailable]) => (
-            <div
-              key={label}
-              className={`
-                flex
-                min-h-[28px]
-                items-center
-                gap-[16px]
-                text-[14px]
-                leading-[20px]
-                ${
-                  unavailable
-                    ? "text-[var(--neutral-07)] line-through"
-                    : "text-[var(--shade-02)]"
-                }
-              `}
-            >
-              <Icon
-                size={20}
-                strokeWidth={1.7}
-                className="shrink-0"
-              />
+          {amenities.map((label) => {
+            const Icon = getIcon(label);
+            const styles = getAmenityClasses(label);
 
-              <span>{label}</span>
-            </div>
-          ))}
+            return (
+              <div
+                key={label}
+                className={`
+                  flex
+                  min-h-[28px]
+                  items-center
+                  gap-[16px]
+                  text-[14px]
+                  leading-[20px]
+                  ${styles.container}
+                `}
+              >
+                <Icon
+                  size={22}
+                  strokeWidth={1.5}
+                  className={styles.icon}
+                />
+
+                <span className={styles.text}>
+                  {label}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <button
@@ -215,11 +299,14 @@ function Amenities() {
             hover:bg-[var(--neutral-01)]
           "
         >
-          Show all 50 amenities
+          Show all {availableAmenities.length} amenities
         </button>
       </section>
 
-      {/* All amenities modal */}
+      {/* =====================================================
+          ALL AMENITIES MODAL
+      ===================================================== */}
+
       {showAllAmenities && (
         <div
           className="
@@ -253,10 +340,7 @@ function Amenities() {
               shadow-[0_12px_40px_rgba(0,0,0,0.20)]
             "
           >
-            {/* =====================================================
-                FIXED MODAL HEADER
-                X BUTTON STAYS IN PLACE WHILE CONTENT SCROLLS
-            ===================================================== */}
+            {/* MODAL HEADER */}
 
             <div
               className="
@@ -296,9 +380,7 @@ function Amenities() {
               </button>
             </div>
 
-            {/* =====================================================
-                SCROLLABLE CONTENT
-            ===================================================== */}
+            {/* SCROLLABLE CONTENT */}
 
             <div
               className="
@@ -323,68 +405,73 @@ function Amenities() {
                 What this place offers
               </h2>
 
-              {amenityCategories.map(({ title, items }) => (
-                <section
-                  key={title}
-                  className="mb-[34px]"
-                >
-                  <h3
-                    className="
-                      m-0
-                      mb-[12px]
-                      text-[20px]
-                      font-semibold
-                      leading-[26px]
-                      text-[var(--shade-02)]
-                    "
+              {amenityCategories.map(({ title, items }) => {
+                const availableItems = items.filter((item) =>
+                  availableAmenities.includes(item)
+                );
+
+                if (availableItems.length === 0) {
+                  return null;
+                }
+
+                return (
+                  <section
+                    key={title}
+                    className="mb-[34px]"
                   >
-                    {title}
-                  </h3>
+                    <h3
+                      className="
+                        m-0
+                        mb-[12px]
+                        text-[20px]
+                        font-semibold
+                        leading-[26px]
+                        text-[var(--shade-02)]
+                      "
+                    >
+                      {title}
+                    </h3>
 
-                  <div>
-                    {items.map(([Icon, label, unavailable]) => (
-                      <div
-                        key={`${title}-${label}`}
-                        className="
-                          flex
-                          min-h-[66px]
-                          items-center
-                          gap-[18px]
-                          border-b
-                          border-[var(--neutral-02)]
-                        "
-                      >
-                        <Icon
-                          size={27}
-                          strokeWidth={1.5}
-                          className={`
-                            shrink-0
-                            ${
-                              unavailable
-                                ? "text-[var(--neutral-06)]"
-                                : "text-[var(--shade-02)]"
-                            }
-                          `}
-                        />
+                    <div>
+                      {availableItems.map((label) => {
+                        const Icon = getIcon(label);
+                        const styles = getAmenityClasses(label);
 
-                        <span
-                          className={`
-                            text-[18px]
-                            leading-[24px]
-                            ${
-                              unavailable
-                                ? "text-[var(--neutral-07)] line-through"
-                                : "text-[var(--shade-02)]"
-                            }
-                          `}
-                        >
-                          {label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              ))}
+                        return (
+                          <div
+                            key={`${title}-${label}`}
+                            className={`
+                              flex
+                              min-h-[66px]
+                              items-center
+                              gap-[18px]
+                              border-b
+                              border-[var(--neutral-02)]
+                              ${styles.container}
+                            `}
+                          >
+                            <Icon
+                              size={27}
+                              strokeWidth={1.5}
+                              className={styles.icon}
+                            />
+
+                            <span
+                              className={`
+                                text-[18px]
+                                leading-[24px]
+                                ${styles.text}
+                              `}
+                            >
+                              {label}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           </div>
         </div>

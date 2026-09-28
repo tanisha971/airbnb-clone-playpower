@@ -4,7 +4,9 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-function HostSection() {
+function HostSection({ listing }) {
+  const host = listing?.host || {};
+
   const coHosts = [
     {
       name: "Sharath",
@@ -121,15 +123,32 @@ function HostSection() {
                   bg-[var(--accent-01)]
                 "
               >
-                <img
-                  src="/assets/host/mirashya.jpg"
-                  alt="Mirashya Homes"
-                  className="
-                    h-full
-                    w-full
-                    object-cover
-                  "
-                />
+                {host.image ? (
+                  <img
+                    src={host.image}
+                    alt={host.name || "Host"}
+                    className="
+                      h-full
+                      w-full
+                      object-cover
+                    "
+                  />
+                ) : (
+                  <div
+                    className="
+                      flex
+                      h-full
+                      w-full
+                      items-center
+                      justify-center
+                      text-[32px]
+                      font-semibold
+                      text-[var(--primary-02)]
+                    "
+                  >
+                    {host.name?.charAt(0) || "H"}
+                  </div>
+                )}
 
                 <span
                   className="
@@ -166,9 +185,7 @@ function HostSection() {
                   text-[var(--shade-02)]
                 "
               >
-                Mirashya
-                <br />
-                Homes
+                {host.name || "Host"}
               </h3>
 
               <span
@@ -205,7 +222,7 @@ function HostSection() {
                     text-[var(--shade-02)]
                   "
                 >
-                  1,463
+                  {host.reviews ?? 0}
                 </span>
 
                 <span
@@ -238,7 +255,7 @@ function HostSection() {
                     text-[var(--shade-02)]
                   "
                 >
-                  4.68★
+                  {host.rating ?? "—"}★
                 </span>
 
                 <span
@@ -271,7 +288,7 @@ function HostSection() {
                     text-[var(--shade-02)]
                   "
                 >
-                  2
+                  {host.yearsHosting ?? 0}
                 </span>
 
                 <span
@@ -291,7 +308,9 @@ function HostSection() {
 
           <div className="mt-[24px] space-y-[20px]">
             <div className="flex items-center gap-[16px]">
-              <span className="text-[26px] leading-none">♧</span>
+              <span className="text-[26px] leading-none">
+                ♧
+              </span>
 
               <span
                 className="
@@ -305,7 +324,9 @@ function HostSection() {
             </div>
 
             <div className="flex items-center gap-[16px]">
-              <span className="text-[26px] leading-none">♢</span>
+              <span className="text-[26px] leading-none">
+                ♢
+              </span>
 
               <span
                 className="
@@ -348,9 +369,9 @@ function HostSection() {
               gap-y-[22px]
             "
           >
-            {coHosts.map((host) => (
+            {coHosts.map((coHost) => (
               <div
-                key={host.name}
+                key={coHost.name}
                 className="
                   flex
                   items-center
@@ -370,10 +391,10 @@ function HostSection() {
                     bg-[var(--accent-01)]
                   "
                 >
-                  {host.image ? (
+                  {coHost.image ? (
                     <img
-                      src={host.image}
-                      alt={host.name}
+                      src={coHost.image}
+                      alt={coHost.name}
                       className="
                         h-full
                         w-full
@@ -388,7 +409,7 @@ function HostSection() {
                         text-[var(--primary-02)]
                       "
                     >
-                      {host.name.charAt(0)}
+                      {coHost.name.charAt(0)}
                     </span>
                   )}
                 </div>
@@ -400,7 +421,7 @@ function HostSection() {
                     text-[var(--shade-02)]
                   "
                 >
-                  {host.name}
+                  {coHost.name}
                 </span>
               </div>
             ))}
@@ -429,8 +450,21 @@ function HostSection() {
               text-[var(--shade-02)]
             "
           >
-            <div>Response rate: 100%</div>
-            <div>Responds within an hour</div>
+            <div className="flex items-center gap-[10px]">
+              <MessageCircle
+                size={20}
+                strokeWidth={1.7}
+              />
+              <span>Response rate: 100%</span>
+            </div>
+
+            <div className="mt-[10px] flex items-center gap-[10px]">
+              <Clock3
+                size={20}
+                strokeWidth={1.7}
+              />
+              <span>Responds within an hour</span>
+            </div>
           </div>
 
           {/* MESSAGE */}
@@ -443,6 +477,7 @@ function HostSection() {
               h-[56px]
               items-center
               justify-center
+              gap-[10px]
               rounded-[10px]
               border-0
               bg-[var(--neutral-01)]

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Navbar from "../components/Navbar/Navbar";
 
@@ -13,7 +13,13 @@ import FooterInfo from "../components/Footer/FooterInfo";
 import PhotoTourScrollable from "../components/PhotoTour/PhotoTourScrollable";
 import Lightbox from "../components/Lightbox/Lightbox";
 
+import { getListing } from "../services/listingApi";
+
 function ListingPage() {
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const [isPhotoTourOpen, setIsPhotoTourOpen] =
     useState(false);
 
@@ -23,9 +29,24 @@ function ListingPage() {
   const [lightboxIndex, setLightboxIndex] =
     useState(0);
 
-  /* =====================================================
-     PHOTO TOUR
-  ===================================================== */
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        setLoading(true);
+
+        const data = await getListing("mirashya-ug10");
+
+        setListing(data);
+      } catch (error) {
+        console.error("Failed to load listing:", error);
+        setError("Failed to load listing.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListing();
+  }, []);
 
   const openPhotoTour = useCallback(() => {
     setIsPhotoTourOpen(true);
@@ -34,10 +55,6 @@ function ListingPage() {
   const closePhotoTour = useCallback(() => {
     setIsPhotoTourOpen(false);
   }, []);
-
-  /* =====================================================
-     LIGHTBOX
-  ===================================================== */
 
   const openLightbox = useCallback((index) => {
     setLightboxIndex(index);
@@ -63,43 +80,35 @@ function ListingPage() {
     );
   }, []);
 
-  return (
-    <div
-      className="
-        site-shell
-        min-h-screen
-        bg-[var(--shade-01)]
-      "
-    >
-      {/* =====================================================
-          NAVBAR
-      ===================================================== */}
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
+  if (error || !listing) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        {error || "Listing not found."}
+      </div>
+    );
+  }
+
+  return (
+    <div className="site-shell min-h-screen bg-[var(--shade-01)]">
       <Navbar />
 
-      {/* =====================================================
-          MAIN LISTING
-      ===================================================== */}
-
       <Listing
+        listing={listing}
         onShowAllPhotos={openPhotoTour}
       />
 
-      {/* =====================================================
-          MAJOR PAGE SECTIONS
-      ===================================================== */}
-
       <Reviews />
-
-      <Location />
-
-      <HostSection />
-
-      <FooterInfo />
-
-      {/* =====================================================
-          PHOTO TOUR
-      ===================================================== */}
+      <Location listing={listing} />
+      <HostSection listing={listing} />
+      <FooterInfo listing={listing} />
 
       {isPhotoTourOpen && (
         <PhotoTourScrollable
@@ -108,10 +117,6 @@ function ListingPage() {
           onOpenLightbox={openLightbox}
         />
       )}
-
-      {/* =====================================================
-          LIGHTBOX
-      ===================================================== */}
 
       {isLightboxOpen && (
         <Lightbox

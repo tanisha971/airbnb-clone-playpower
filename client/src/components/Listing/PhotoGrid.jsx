@@ -1,24 +1,56 @@
 import { Grip } from "lucide-react";
 
+/*
+  Fallback photos.
+
+  These are kept exported because PhotoTour / Lightbox
+  currently use galleryPhotos.
+*/
 export const galleryPhotos = [
-  { src: "/assets/gallery/01_LR1.avif", alt: "Living room" },
-  { src: "/assets/gallery/10_KN1.avif", alt: "Dining area" },
-  { src: "/assets/gallery/jacuzzi.avif", alt: "Jacuzzi" },
-  { src: "/assets/gallery/22_BR5.avif", alt: "Bedroom" },
-  { src: "/assets/gallery/ext1.jpg", alt: "Property exterior" },
+  {
+    src: "/assets/gallery/01_LR1.avif",
+    alt: "Living room",
+  },
+  {
+    src: "/assets/gallery/10_KN1.avif",
+    alt: "Dining area",
+  },
+  {
+    src: "/assets/gallery/jacuzzi.avif",
+    alt: "Jacuzzi",
+  },
+  {
+    src: "/assets/gallery/22_BR5.avif",
+    alt: "Bedroom",
+  },
+  {
+    src: "/assets/gallery/ext1.jpg",
+    alt: "Property exterior",
+  },
 ];
 
-function PhotoGrid({ onShowAllPhotos }) {
+function PhotoGrid({ listing, onShowAllPhotos }) {
+  /*
+    Use photos coming from MongoDB.
+
+    If listing.photos is unavailable for any reason,
+    fall back to the existing local gallery photos.
+  */
+  const photos =
+    listing?.photos?.length >= 5
+      ? listing.photos
+      : galleryPhotos;
+
   return (
     <section
-  id="photos"
-  className="
-    relative
-    mx-auto
-    w-[calc(100%-140px)]
-    max-w-[1120px]
-  "
->
+      id="photos"
+      className="
+        relative
+        mx-auto
+        w-[calc(100%-140px)]
+        max-w-[1120px]
+      "
+    >
       <div
         className="
           grid
@@ -30,7 +62,9 @@ function PhotoGrid({ onShowAllPhotos }) {
           rounded-[12px]
         "
       >
-        {/* Main image */}
+        {/* =================================================
+            MAIN IMAGE
+        ================================================= */}
 
         <button
           type="button"
@@ -46,8 +80,8 @@ function PhotoGrid({ onShowAllPhotos }) {
           "
         >
           <img
-            src={galleryPhotos[0].src}
-            alt={galleryPhotos[0].alt}
+            src={photos[0].src}
+            alt={photos[0].alt}
             className="
               h-full
               w-full
@@ -59,7 +93,9 @@ function PhotoGrid({ onShowAllPhotos }) {
           />
         </button>
 
-        {/* Image 2 */}
+        {/* =================================================
+            IMAGE 2
+        ================================================= */}
 
         <button
           type="button"
@@ -74,8 +110,8 @@ function PhotoGrid({ onShowAllPhotos }) {
           "
         >
           <img
-            src={galleryPhotos[1].src}
-            alt={galleryPhotos[1].alt}
+            src={photos[1].src}
+            alt={photos[1].alt}
             className="
               h-full
               w-full
@@ -87,7 +123,9 @@ function PhotoGrid({ onShowAllPhotos }) {
           />
         </button>
 
-        {/* Image 3 */}
+        {/* =================================================
+            IMAGE 3
+        ================================================= */}
 
         <button
           type="button"
@@ -102,8 +140,8 @@ function PhotoGrid({ onShowAllPhotos }) {
           "
         >
           <img
-            src={galleryPhotos[2].src}
-            alt={galleryPhotos[2].alt}
+            src={photos[2].src}
+            alt={photos[2].alt}
             className="
               h-full
               w-full
@@ -115,7 +153,9 @@ function PhotoGrid({ onShowAllPhotos }) {
           />
         </button>
 
-        {/* Image 4 */}
+        {/* =================================================
+            IMAGE 4
+        ================================================= */}
 
         <button
           type="button"
@@ -130,8 +170,8 @@ function PhotoGrid({ onShowAllPhotos }) {
           "
         >
           <img
-            src={galleryPhotos[3].src}
-            alt={galleryPhotos[3].alt}
+            src={photos[3].src}
+            alt={photos[3].alt}
             className="
               h-full
               w-full
@@ -143,7 +183,9 @@ function PhotoGrid({ onShowAllPhotos }) {
           />
         </button>
 
-        {/* Image 5 + Show all */}
+        {/* =================================================
+            IMAGE 5 + SHOW ALL PHOTOS
+        ================================================= */}
 
         <button
           type="button"
@@ -158,8 +200,8 @@ function PhotoGrid({ onShowAllPhotos }) {
           "
         >
           <img
-            src={galleryPhotos[4].src}
-            alt={galleryPhotos[4].alt}
+            src={photos[4].src}
+            alt={photos[4].alt}
             className="
               h-full
               w-full
@@ -193,7 +235,11 @@ function PhotoGrid({ onShowAllPhotos }) {
               group-hover:bg-[var(--neutral-01)]
             "
           >
-            <Grip size={15} strokeWidth={1.8} />
+            <Grip
+              size={15}
+              strokeWidth={1.8}
+            />
+
             Show all photos
           </span>
         </button>
@@ -201,9 +247,5 @@ function PhotoGrid({ onShowAllPhotos }) {
     </section>
   );
 }
-
-/* =========================================================
-   PROPERTY OVERVIEW
-========================================================= */
 
 export default PhotoGrid;

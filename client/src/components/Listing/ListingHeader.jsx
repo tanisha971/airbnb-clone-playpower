@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Heart, Share } from "lucide-react";
 
-function ListingHeader() {
+function ListingHeader({ listing }) {
   const title =
-    "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10";
-
+    listing?.title || "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10";
   const [isSaved, setIsSaved] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 

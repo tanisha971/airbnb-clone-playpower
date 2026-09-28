@@ -5,8 +5,8 @@ import {
 } from "lucide-react";
 
 function Lightbox({
-  photos,
-  currentIndex,
+  photos = [],
+  currentIndex = 0,
   onClose,
   onPrevious,
   onNext,
@@ -14,10 +14,13 @@ function Lightbox({
   const currentPhoto = photos[currentIndex];
 
   useEffect(() => {
+    if (!photos.length) return;
+
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         event.preventDefault();
         onClose();
+        return;
       }
 
       if (
@@ -26,6 +29,7 @@ function Lightbox({
       ) {
         event.preventDefault();
         onPrevious();
+        return;
       }
 
       if (
@@ -87,7 +91,7 @@ function Lightbox({
       aria-modal="true"
       aria-label="Photo viewer"
     >
-      {/* Top bar */}
+      {/* TOP BAR */}
 
       <div
         className="
@@ -103,7 +107,7 @@ function Lightbox({
           px-[32px]
         "
       >
-        {/* Counter */}
+        {/* COUNTER */}
 
         <div
           className="
@@ -122,7 +126,7 @@ function Lightbox({
           {currentIndex + 1} / {photos.length}
         </div>
 
-        {/* Close */}
+        {/* CLOSE */}
 
         <button
           type="button"
@@ -155,7 +159,7 @@ function Lightbox({
         </button>
       </div>
 
-      {/* Image area */}
+      {/* IMAGE AREA */}
 
       <div
         className="
@@ -188,7 +192,7 @@ function Lightbox({
         />
       </div>
 
-      {/* Previous */}
+      {/* PREVIOUS */}
 
       <button
         type="button"
@@ -226,7 +230,7 @@ function Lightbox({
         />
       </button>
 
-      {/* Next */}
+      {/* NEXT */}
 
       <button
         type="button"

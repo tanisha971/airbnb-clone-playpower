@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function AvailabilityCalendar() {
+function AvailabilityCalendar({ listing }) {
   const octoberWeeks = [
     ["", "", "", "", "1", "2", "3"],
     ["4", "5", "6", "7", "8", "9", "10"],
@@ -147,6 +147,9 @@ function AvailabilityCalendar() {
     </div>
   );
 
+  const city = listing?.location?.city || "Candolim";
+  const nights = listing?.nights || 5;
+
   return (
     <section
       className="
@@ -167,7 +170,7 @@ function AvailabilityCalendar() {
             text-[var(--shade-02)]
           "
         >
-          5 nights in Candolim
+          {nights} nights in {city}
         </h2>
 
         <p

@@ -1,8 +1,19 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 
-function PropertyDescription() {
+function PropertyDescription({ listing }) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const description = listing?.description || "";
+
+  /*
+    Keep the collapsed view concise while allowing the
+    full MongoDB description to be shown on expansion.
+  */
+  const collapsedDescription =
+    description.length > 280
+      ? `${description.slice(0, 280).trim()}...`
+      : description;
 
   return (
     <section
@@ -57,77 +68,52 @@ function PropertyDescription() {
           text-[var(--shade-02)]
         "
       >
-        {isExpanded ? (
-          <>
-            <p className="m-0">
-              🌴 Plan Your Relaxing Holiday at Amor De Goa by
-              Mirashya Homes! ✨ Stay in this cozy 1BHK in the
-              heart of Candolim, featuring a private jacuzzi 🛁
-              for the perfect unwind.
-            </p>
-
-            <p className="m-0 mt-[8px]">
-              Enjoy high-speed WiFi 💻, Smart TV 📺,
-              pet-friendly comfort 🐾, and stylish interiors.
-            </p>
-
-            <p className="m-0 mt-[8px]">
-              Just minutes from Candolim Beach 🏖️, popular
-              cafés, restaurants, and nightlife 🍹, it’s ideal
-              for couples seeking romance, relaxation, and a
-              touch of luxury in North Goa. ❤️🌴
-            </p>
-          </>
-        ) : (
-          <p className="m-0">
-            🌴 Plan Your Relaxing Holiday at Amor De Goa by
-            Mirashya Homes! ✨ Stay in this cozy 1BHK in the
-            heart of Candolim, featuring a private jacuzzi 🛁
-            for the perfect unwind. Enjoy high-speed WiFi 💻,
-            Smart TV 📺, pet-friendly comfort 🐾, and stylish
-            interiors. Just minutes from Candolim Beach 🏖️,
-            popular cafés, restaurants, and nightlife 🍹, it’s
-          </p>
-        )}
+        <p className="m-0">
+          {isExpanded
+            ? description
+            : collapsedDescription}
+        </p>
       </div>
 
       {/* =====================================================
           SHOW MORE / SHOW LESS
       ===================================================== */}
 
-      <button
-        type="button"
-        onClick={() =>
-          setIsExpanded((value) => !value)
-        }
-        className="
-          mt-[12px]
-          flex
-          items-center
-          gap-[4px]
-          border-0
-          bg-transparent
-          p-0
-          text-[14px]
-          font-semibold
-          leading-[20px]
-          text-[var(--shade-02)]
-          underline
-          underline-offset-[3px]
-        "
-      >
-        {isExpanded ? "Show less" : "Show more"}
+      {description.length > 280 && (
+        <button
+          type="button"
+          onClick={() =>
+            setIsExpanded((value) => !value)
+          }
+          className="
+            mt-[12px]
+            flex
+            items-center
+            gap-[4px]
+            border-0
+            bg-transparent
+            p-0
+            text-[14px]
+            font-semibold
+            leading-[20px]
+            text-[var(--shade-02)]
+            underline
+            underline-offset-[3px]
+          "
+        >
+          {isExpanded ? "Show less" : "Show more"}
 
-        <ChevronRight
-          size={16}
-          strokeWidth={1.8}
-          className={`
-            transition-transform
-            duration-200
-            ${isExpanded ? "rotate-90" : ""}
-          `}
-        />
-      </button>
+          <ChevronRight
+            size={16}
+            strokeWidth={1.8}
+            className={`
+              transition-transform
+              duration-200
+              ${isExpanded ? "rotate-90" : ""}
+            `}
+          />
+        </button>
+      )}
     </section>
   );
 }

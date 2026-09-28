@@ -517,13 +517,13 @@ function Navbar() {
               type="button"
               className="
                 flex
-                h-[48px]
-                min-w-[110px]
+                h-[42px]
+                min-w-[100px]
                 items-center
                 justify-center
                 rounded-full
                 border-0
-                bg-[var(--primary-02)]
+                bg-[linear-gradient(90deg,#e61e4d_0%,#d70466_100%)]
                 px-[24px]
                 text-[16px]
                 font-semibold

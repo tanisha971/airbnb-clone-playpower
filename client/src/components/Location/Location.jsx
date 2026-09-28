@@ -5,8 +5,34 @@ import {
   Minus,
   Plus,
 } from "lucide-react";
+import { useState } from "react";
 
-function Location() {
+function Location({ listing }) {
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [showMore, setShowMore] = useState(false);
+
+  const location = listing?.location || {};
+
+  const locationText = [
+    location.city,
+    location.state,
+    location.country,
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const exactLocationMessage =
+    location.exactLocationMessage ||
+    "Exact location will be provided after booking.";
+
+  const handleZoomIn = () => {
+    setZoomLevel((current) => Math.min(current + 0.1, 1.4));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((current) => Math.max(current - 0.1, 0.8));
+  };
+
   return (
     <section
       id="location"
@@ -42,7 +68,7 @@ function Location() {
           text-[var(--shade-02)]
         "
       >
-        Candolim, Goa, India
+        {locationText || "Candolim, Goa, India"}
       </p>
 
       {/* Map */}
@@ -60,96 +86,137 @@ function Location() {
           bg-[#e8efe3]
         "
       >
-        {/* Water */}
-
-        <div
-          className="
-            absolute
-            left-0
-            top-0
-            h-full
-            w-[38%]
-            bg-[#b8dce8]
-          "
-        />
-
-        {/* Land shape */}
-
-        <div
-          className="
-            absolute
-            left-[30%]
-            top-[-15%]
-            h-[130%]
-            w-[18%]
-            rotate-[27deg]
-            bg-[#e8efe3]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            right-0
-            top-0
-            h-full
-            w-[65%]
-            bg-[#e8efe3]
-          "
-        />
-
-        {/* Map grid */}
+        {/* Zoomable map content */}
 
         <div
           className="
             absolute
             inset-0
-            opacity-[0.35]
+            transition-transform
+            duration-200
           "
           style={{
-            backgroundImage: `
-              linear-gradient(
-                to right,
-                rgba(120, 130, 120, 0.2) 1px,
-                transparent 1px
-              ),
-              linear-gradient(
-                to bottom,
-                rgba(120, 130, 120, 0.2) 1px,
-                transparent 1px
-              )
-            `,
-            backgroundSize: "120px 90px",
+            transform: `scale(${zoomLevel})`,
           }}
-        />
+        >
+          {/* Water */}
 
-        {/* Neighbourhood areas */}
+          <div
+            className="
+              absolute
+              left-0
+              top-0
+              h-full
+              w-[38%]
+              bg-[#b8dce8]
+            "
+          />
 
-        <div
-          className="
-            absolute
-            left-[25%]
-            top-[28%]
-            h-[70px]
-            w-[70px]
-            rounded-full
-            bg-[#c8dfb8]
-            opacity-80
-          "
-        />
+          {/* Land shape */}
 
-        <div
-          className="
-            absolute
-            right-[25%]
-            top-[48%]
-            h-[90px]
-            w-[90px]
-            rounded-full
-            bg-[#c8dfb8]
-            opacity-70
-          "
-        />
+          <div
+            className="
+              absolute
+              left-[30%]
+              top-[-15%]
+              h-[130%]
+              w-[18%]
+              rotate-[27deg]
+              bg-[#e8efe3]
+            "
+          />
+
+          <div
+            className="
+              absolute
+              right-0
+              top-0
+              h-full
+              w-[65%]
+              bg-[#e8efe3]
+            "
+          />
+
+          {/* Map grid */}
+
+          <div
+            className="
+              absolute
+              inset-0
+              opacity-[0.35]
+            "
+            style={{
+              backgroundImage: `
+                linear-gradient(
+                  to right,
+                  rgba(120, 130, 120, 0.2) 1px,
+                  transparent 1px
+                ),
+                linear-gradient(
+                  to bottom,
+                  rgba(120, 130, 120, 0.2) 1px,
+                  transparent 1px
+                )
+              `,
+              backgroundSize: "120px 90px",
+            }}
+          />
+
+          {/* Neighbourhood areas */}
+
+          <div
+            className="
+              absolute
+              left-[25%]
+              top-[28%]
+              h-[70px]
+              w-[70px]
+              rounded-full
+              bg-[#c8dfb8]
+              opacity-80
+            "
+          />
+
+          <div
+            className="
+              absolute
+              right-[25%]
+              top-[48%]
+              h-[90px]
+              w-[90px]
+              rounded-full
+              bg-[#c8dfb8]
+              opacity-70
+            "
+          />
+
+          {/* Property marker */}
+
+          <div
+            className="
+              absolute
+              left-[49%]
+              top-[48%]
+              flex
+              h-[34px]
+              w-[34px]
+              -translate-x-1/2
+              -translate-y-1/2
+              items-center
+              justify-center
+              rounded-full
+              bg-[var(--shade-02)]
+              text-[var(--shade-01)]
+              shadow-[0_2px_6px_rgba(0,0,0,0.25)]
+            "
+          >
+            <MapPin
+              size={18}
+              fill="currentColor"
+              strokeWidth={1.5}
+            />
+          </div>
+        </div>
 
         {/* Locate button */}
 
@@ -160,6 +227,7 @@ function Location() {
             absolute
             left-[12px]
             top-[12px]
+            z-10
             flex
             h-[32px]
             w-[32px]
@@ -186,6 +254,7 @@ function Location() {
             absolute
             right-[12px]
             top-[12px]
+            z-10
             flex
             flex-col
             overflow-hidden
@@ -198,7 +267,9 @@ function Location() {
         >
           <button
             type="button"
+            onClick={handleZoomIn}
             aria-label="Zoom in"
+            disabled={zoomLevel >= 1.4}
             className="
               flex
               h-[32px]
@@ -209,6 +280,8 @@ function Location() {
               bg-[var(--shade-01)]
               text-[var(--shade-02)]
               hover:bg-[var(--neutral-01)]
+              disabled:cursor-not-allowed
+              disabled:text-[var(--neutral-04)]
             "
           >
             <Plus
@@ -221,7 +294,9 @@ function Location() {
 
           <button
             type="button"
+            onClick={handleZoomOut}
             aria-label="Zoom out"
+            disabled={zoomLevel <= 0.8}
             className="
               flex
               h-[32px]
@@ -232,6 +307,8 @@ function Location() {
               bg-[var(--shade-01)]
               text-[var(--shade-02)]
               hover:bg-[var(--neutral-01)]
+              disabled:cursor-not-allowed
+              disabled:text-[var(--neutral-04)]
             "
           >
             <Minus
@@ -239,33 +316,6 @@ function Location() {
               strokeWidth={1.8}
             />
           </button>
-        </div>
-
-        {/* Property marker */}
-
-        <div
-          className="
-            absolute
-            left-[49%]
-            top-[48%]
-            flex
-            h-[34px]
-            w-[34px]
-            -translate-x-1/2
-            -translate-y-1/2
-            items-center
-            justify-center
-            rounded-full
-            bg-[var(--shade-02)]
-            text-[var(--shade-01)]
-            shadow-[0_2px_6px_rgba(0,0,0,0.25)]
-          "
-        >
-          <MapPin
-            size={18}
-            fill="currentColor"
-            strokeWidth={1.5}
-          />
         </div>
       </div>
 
@@ -280,7 +330,7 @@ function Location() {
           text-[var(--neutral-07)]
         "
       >
-        Exact location will be provided after booking.
+        {exactLocationMessage}
       </p>
 
       {/* Neighbourhood */}
@@ -308,13 +358,32 @@ function Location() {
             text-[var(--shade-02)]
           "
         >
-          Located in the heart of Candolim, Anjuna and Goa
-          offers a peaceful stay with easy access to beaches,
-          cafés, shops and popular attractions.
+          Located in the heart of {location.city || "Candolim"},{" "}
+          {location.state || "Goa"} offers a peaceful stay with
+          easy access to beaches, cafés, shops and popular
+          attractions.
         </p>
+
+        {showMore && (
+          <p
+            className="
+              m-0
+              mt-[8px]
+              max-w-[760px]
+              text-[12px]
+              leading-[19px]
+              text-[var(--shade-02)]
+            "
+          >
+            Enjoy convenient access to nearby restaurants,
+            beaches and local attractions while staying close
+            to the main area.
+          </p>
+        )}
 
         <button
           type="button"
+          onClick={() => setShowMore((value) => !value)}
           className="
             mt-[5px]
             flex
@@ -330,11 +399,16 @@ function Location() {
             underline-offset-[2px]
           "
         >
-          Show more
+          {showMore ? "Show less" : "Show more"}
 
           <ChevronRight
             size={12}
             strokeWidth={2}
+            className={`
+              transition-transform
+              duration-150
+              ${showMore ? "rotate-90" : ""}
+            `}
           />
         </button>
       </div>

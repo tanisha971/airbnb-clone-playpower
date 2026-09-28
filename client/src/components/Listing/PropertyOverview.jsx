@@ -1,7 +1,7 @@
 import { CircleUserRound, Star } from "lucide-react";
 import { useState } from "react";
 
-function PropertyOverview() {
+function PropertyOverview({ listing }) {
   const [hostImageError, setHostImageError] = useState(false);
 
   return (
@@ -27,7 +27,7 @@ function PropertyOverview() {
           text-[var(--shade-02)]
         "
       >
-        Entire serviced apartment in Candolim, India
+        {listing.propertyType}
       </h2>
 
       {/* =====================================================
@@ -44,7 +44,8 @@ function PropertyOverview() {
           text-[var(--shade-02)]
         "
       >
-        3 guests · 1 bedroom · 1 bed · 1 bathroom
+        {listing.guests} guests · {listing.bedrooms} bedroom ·{" "}
+        {listing.beds} bed · {listing.bathrooms} bathroom
       </p>
 
       {/* =====================================================
@@ -52,153 +53,153 @@ function PropertyOverview() {
       ===================================================== */}
 
       <div
-  className="
-    mt-[36px]
-    flex
-    h-[78px]
-    w-full
-    items-stretch
-    overflow-hidden
-    rounded-[16px]
-    border
-    border-[var(--neutral-03)]
-    bg-[var(--shade-01)]
-  "
->
-  {/* GUEST FAVOURITE + DESCRIPTION */}
+        className="
+          mt-[36px]
+          flex
+          h-[78px]
+          w-full
+          items-stretch
+          overflow-hidden
+          rounded-[16px]
+          border
+          border-[var(--neutral-03)]
+          bg-[var(--shade-01)]
+        "
+      >
+        {/* GUEST FAVOURITE + DESCRIPTION */}
 
-  <div
-    className="
-      flex
-      min-w-0
-      flex-1
-      items-center
-      gap-[20px]
-      px-[18px]
-    "
-  >
-    <img
-      src="/assets/logo/Guest-Favorite.png"
-      alt="Guest favourite"
-      className="
-        block
-        h-[50px]
-        w-[110px]
-        shrink-0
-        object-contain
-      "
-    />
+        <div
+          className="
+            flex
+            min-w-0
+            flex-1
+            items-center
+            gap-[20px]
+            px-[18px]
+          "
+        >
+          <img
+            src="/assets/logo/Guest-Favorite.png"
+            alt="Guest favourite"
+            className="
+              block
+              h-[50px]
+              w-[110px]
+              shrink-0
+              object-contain
+            "
+          />
 
-    <p
-      className="
-        m-0
-        min-w-0
-        max-w-[300px]
-        text-[16px]
-        font-normal
-        leading-[22px]
-        text-[var(--shade-02)]
-      "
-    >
-      One of the most loved homes on Airbnb,
-      according to guests
-    </p>
-  </div>
+          <p
+            className="
+              m-0
+              min-w-0
+              max-w-[300px]
+              text-[16px]
+              font-normal
+              leading-[22px]
+              text-[var(--shade-02)]
+            "
+          >
+            One of the most loved homes on Airbnb,
+            according to guests
+          </p>
+        </div>
 
-  {/* RATING */}
+        {/* RATING */}
 
-  <div
-    className="
-      flex
-      w-[112px]
-      shrink-0
-      flex-col
-      items-center
-      justify-center
-    "
-  >
-    <span
-      className="
-        text-[24px]
-        font-semibold
-        leading-[28px]
-        tracking-[-0.02em]
-        text-[var(--shade-02)]
-      "
-    >
-      4.95
-    </span>
+        <div
+          className="
+            flex
+            w-[112px]
+            shrink-0
+            flex-col
+            items-center
+            justify-center
+          "
+        >
+          <span
+            className="
+              text-[24px]
+              font-semibold
+              leading-[28px]
+              tracking-[-0.02em]
+              text-[var(--shade-02)]
+            "
+          >
+            {listing.rating}
+          </span>
 
-    <div
-      className="
-        mt-[4px]
-        flex
-        items-center
-        gap-[1px]
-      "
-    >
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          size={12}
-          fill="currentColor"
-          strokeWidth={0}
-          className="text-[var(--shade-02)]"
+          <div
+            className="
+              mt-[4px]
+              flex
+              items-center
+              gap-[1px]
+            "
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star
+                key={star}
+                size={12}
+                fill="currentColor"
+                strokeWidth={0}
+                className="text-[var(--shade-02)]"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* DIVIDER */}
+
+        <div
+          className="
+            my-[24px]
+            w-px
+            shrink-0
+            bg-[var(--neutral-03)]
+          "
         />
-      ))}
-    </div>
-  </div>
 
-  {/* DIVIDER */}
+        {/* REVIEWS */}
 
-  <div
-    className="
-      my-[24px]
-      w-px
-      shrink-0
-      bg-[var(--neutral-03)]
-    "
-  />
+        <div
+          className="
+            flex
+            w-[125px]
+            shrink-0
+            flex-col
+            items-center
+            justify-center
+          "
+        >
+          <span
+            className="
+              text-[24px]
+              font-semibold
+              leading-[28px]
+              tracking-[-0.02em]
+              text-[var(--shade-02)]
+            "
+          >
+            {listing.reviewCount}
+          </span>
 
-  {/* REVIEWS */}
-
-  <div
-    className="
-      flex
-      w-[125px]
-      shrink-0
-      flex-col
-      items-center
-      justify-center
-    "
-  >
-    <span
-      className="
-        text-[24px]
-        font-semibold
-        leading-[28px]
-        tracking-[-0.02em]
-        text-[var(--shade-02)]
-      "
-    >
-      19
-    </span>
-
-    <span
-      className="
-        mt-[4px]
-        text-[14px]
-        font-normal
-        leading-[18px]
-        text-[var(--shade-02)]
-        underline
-        underline-offset-[2px]
-      "
-    >
-      Reviews
-    </span>
-  </div>
-</div>
+          <span
+            className="
+              mt-[4px]
+              text-[14px]
+              font-normal
+              leading-[18px]
+              text-[var(--shade-02)]
+              underline
+              underline-offset-[2px]
+            "
+          >
+            Reviews
+          </span>
+        </div>
+      </div>
 
       {/* =====================================================
           HOST
@@ -227,10 +228,10 @@ function PropertyOverview() {
             bg-[var(--neutral-02)]
           "
         >
-          {!hostImageError ? (
+          {!hostImageError && listing.host?.image ? (
             <img
-              src="/assets/host/mirashya.jpg"
-              alt="Mirashya Homes"
+              src={listing.host.image}
+              alt={listing.host.name}
               className="
                 block
                 h-full
@@ -266,7 +267,7 @@ function PropertyOverview() {
           >
             Hosted by{" "}
             <strong className="font-semibold">
-              Mirashya Homes
+              {listing.host?.name}
             </strong>
           </span>
 
@@ -279,7 +280,7 @@ function PropertyOverview() {
               text-[var(--neutral-07)]
             "
           >
-            2 years hosting
+            {listing.host?.yearsHosting} years hosting
           </span>
         </div>
       </div>

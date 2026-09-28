@@ -10,11 +10,14 @@ import {
   Tag,
 } from "lucide-react";
 
-function Reviews() {
+function Reviews({ listing }) {
+  const rating = Number(listing?.rating || 0);
+  const reviewCount = Number(listing?.reviewCount || 0);
+
   const ratingCategories = [
     {
       label: "Overall rating",
-      rating: "",
+      rating: rating ? rating.toFixed(2) : "—",
       icon: null,
       bars: true,
     },
@@ -137,7 +140,7 @@ function Reviews() {
         <div className="flex justify-center">
           <img
             src="/assets/logo/Guest-Favorite-5.0.png"
-            alt="4.95 Guest favourite"
+            alt={`${rating || 4.95} Guest favourite`}
             className="
               block
               h-[120px]
@@ -195,7 +198,7 @@ function Reviews() {
         "
       >
         {ratingCategories.map(
-          ({ label, rating, icon: Icon, bars }) => (
+          ({ label, rating: categoryRating, icon: Icon, bars }) => (
             <div
               key={label}
               className="
@@ -221,11 +224,7 @@ function Reviews() {
                   {[5, 4, 3, 2, 1].map((number) => (
                     <div
                       key={number}
-                      className="
-                        flex
-                        items-center
-                        gap-[6px]
-                      "
+                      className="flex items-center gap-[6px]"
                     >
                       <span
                         className="
@@ -256,7 +255,7 @@ function Reviews() {
                           style={{
                             width:
                               number === 5
-                                ? "88%"
+                                ? `${Math.min(rating * 17.8, 100)}%`
                                 : number === 4
                                   ? "20%"
                                   : "5%",
@@ -277,7 +276,7 @@ function Reviews() {
                       text-[var(--shade-02)]
                     "
                   >
-                    {rating}
+                    {categoryRating}
                   </span>
 
                   {Icon && (
@@ -307,37 +306,35 @@ function Reviews() {
           py-[20px]
         "
       >
-        {reviewCategories.map(
-          ([label, count, Icon]) => (
-            <div
-              key={label}
-              className="
-                flex
-                h-[36px]
-                items-center
-                gap-[7px]
-                rounded-full
-                border
-                border-[var(--neutral-03)]
-                px-[14px]
-                text-[13px]
-                leading-[18px]
-                text-[var(--shade-02)]
-              "
-            >
-              <Icon
-                size={14}
-                strokeWidth={1.6}
-              />
+        {reviewCategories.map(([label, count, Icon]) => (
+          <div
+            key={label}
+            className="
+              flex
+              h-[36px]
+              items-center
+              gap-[7px]
+              rounded-full
+              border
+              border-[var(--neutral-03)]
+              px-[14px]
+              text-[13px]
+              leading-[18px]
+              text-[var(--shade-02)]
+            "
+          >
+            <Icon
+              size={14}
+              strokeWidth={1.6}
+            />
 
-              <span>{label}</span>
+            <span>{label}</span>
 
-              <span className="text-[var(--neutral-07)]">
-                {count}
-              </span>
-            </div>
-          )
-        )}
+            <span className="text-[var(--neutral-07)]">
+              {count}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* REVIEWS */}
@@ -357,13 +354,7 @@ function Reviews() {
           >
             {/* REVIEWER */}
 
-            <div
-              className="
-                flex
-                items-center
-                gap-[12px]
-              "
-            >
+            <div className="flex items-center gap-[12px]">
               <div
                 className="
                   flex
@@ -384,11 +375,7 @@ function Reviews() {
                   <img
                     src={review.avatar}
                     alt={review.name}
-                    className="
-                      h-full
-                      w-full
-                      object-cover
-                    "
+                    className="h-full w-full object-cover"
                   />
                 ) : (
                   review.avatar
@@ -505,7 +492,7 @@ function Reviews() {
           hover:bg-[var(--neutral-01)]
         "
       >
-        Show all 19 reviews
+        Show all {reviewCount || 19} reviews
       </button>
     </section>
   );

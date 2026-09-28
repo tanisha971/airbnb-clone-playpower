@@ -11,7 +11,7 @@ import AvailabilityCalendar from "./AvailabilityCalendar";
 import DiscountBanner from "./DiscountBanner";
 import BookingCard from "./BookingCard";
 
-function Listing({ onShowAllPhotos }) {
+function Listing({ listing, onShowAllPhotos }) {
   const [reserved, setReserved] = useState(false);
 
   return (
@@ -20,36 +20,21 @@ function Listing({ onShowAllPhotos }) {
           LISTING HEADER
       ===================================================== */}
 
-      <ListingHeader />
+      <ListingHeader listing={listing} />
 
       {/* =====================================================
           PHOTO GALLERY
-          This wrapper gives the navbar's #photos anchor
-          a reliable target.
       ===================================================== */}
 
-      <section
-        id="photos"
-        
-      >
+      <section id="photos">
         <PhotoGrid
+          listing={listing}
           onShowAllPhotos={onShowAllPhotos}
         />
       </section>
 
       {/* =====================================================
           MAIN LISTING CONTENT
-
-          Reference desktop geometry:
-
-          Container  : ~1320px
-          Left       : ~774px
-          Gap        : ~108px
-          Right      : ~438px
-
-          At a 1778px viewport:
-          left edge ≈ 229px
-          right edge ≈ 1549px
       ===================================================== */}
 
       <section
@@ -69,41 +54,30 @@ function Listing({ onShowAllPhotos }) {
         ================================================= */}
 
         <div className="min-w-0">
-          {/* -----------------------------------------------
-              PROPERTY OVERVIEW
-          ----------------------------------------------- */}
 
-          <PropertyOverview />
+          {/* PROPERTY OVERVIEW */}
 
-          {/* -----------------------------------------------
-              PROPERTY HIGHLIGHTS
-          ----------------------------------------------- */}
+          <PropertyOverview listing={listing} />
 
-          <PropertyHighlights />
+          {/* PROPERTY HIGHLIGHTS */}
 
-          {/* -----------------------------------------------
-              DESCRIPTION
-          ----------------------------------------------- */}
+          <PropertyHighlights listing={listing} />
 
-          <PropertyDescription />
+          {/* DESCRIPTION */}
 
-          {/* -----------------------------------------------
-              SLEEPING ARRANGEMENTS
-          ----------------------------------------------- */}
+          <PropertyDescription listing={listing} />
 
-          <SleepingArrangements />
+          {/* SLEEPING ARRANGEMENTS */}
 
-          {/* -----------------------------------------------
-              AMENITIES
-          ----------------------------------------------- */}
+          <SleepingArrangements listing={listing} />
 
-          <Amenities />
+          {/* AMENITIES */}
 
-          {/* -----------------------------------------------
-              AVAILABILITY
-          ----------------------------------------------- */}
+          <Amenities listing={listing} />
 
-          <AvailabilityCalendar />
+          {/* AVAILABILITY */}
+
+          <AvailabilityCalendar listing={listing} />
         </div>
 
         {/* =================================================
@@ -118,26 +92,21 @@ function Listing({ onShowAllPhotos }) {
             self-start
           "
         >
-          {/* -----------------------------------------------
-              DISCOUNT BANNER
-          ----------------------------------------------- */}
+          {/* DISCOUNT BANNER */}
 
           <DiscountBanner />
 
-          {/* -----------------------------------------------
-              BOOKING CARD
-          ----------------------------------------------- */}
+          {/* BOOKING CARD */}
 
           <div className="mt-[28px]">
             <BookingCard
+              listing={listing}
               reserved={reserved}
               onReserve={() => setReserved(true)}
             />
           </div>
 
-          {/* -----------------------------------------------
-              REPORT LISTING
-          ----------------------------------------------- */}
+          {/* REPORT LISTING */}
 
           <button
             type="button"
@@ -169,7 +138,9 @@ function Listing({ onShowAllPhotos }) {
               ⚑
             </span>
 
-            <span className="underline underline-offset-[3px]">Report this listing</span>
+            <span className="underline underline-offset-[3px]">
+              Report this listing
+            </span>
           </button>
         </aside>
       </section>

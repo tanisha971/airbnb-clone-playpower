@@ -1,16 +1,6 @@
-function SleepingArrangements() {
-  const sleepingArrangements = [
-    {
-      room: "Bedroom",
-      description: "1 double bed",
-      image: "/assets/gallery/18_BR1.avif",
-    },
-    {
-      room: "Living room",
-      description: "1 sofa",
-      image: "/assets/gallery/01_LR1.avif",
-    },
-  ];
+function SleepingArrangements({ listing }) {
+  const sleepingArrangements =
+    listing?.sleepingArrangements || [];
 
   return (
     <section

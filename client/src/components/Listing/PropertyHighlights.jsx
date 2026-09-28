@@ -1,26 +1,14 @@
 import { DoorOpen, Sparkles, Waves } from "lucide-react";
 
-function PropertyHighlights() {
-  const highlights = [
-    {
-      icon: Waves,
-      title: "Outdoor entertainment",
-      description:
-        "The pool and alfresco dining are great for summer trips.",
-    },
-    {
-      icon: Sparkles,
-      title: "Designed for staying cool",
-      description:
-        "Beat the heat with the A/C and ceiling fan.",
-    },
-    {
-      icon: DoorOpen,
-      title: "Self check-in",
-      description:
-        "You can check in with the building staff.",
-    },
-  ];
+function PropertyHighlights({ listing }) {
+  const icons = [Waves, Sparkles, DoorOpen];
+
+  const highlights = (listing?.highlights || []).map(
+    (highlight, index) => ({
+      ...highlight,
+      icon: icons[index] || Sparkles,
+    })
+  );
 
   return (
     <section
